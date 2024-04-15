@@ -1,40 +1,66 @@
 "use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import ProductImage from "./ProductImage";
 import InfinityClipCart from "./InfinityClipCart";
 import ProductInfo from "./ProductInfo";
+import getInfinityCtgProductList from "@/app/api/product/getInfinityCtgProductList";
+import { useSearchParams } from "next/navigation";
 
-function InfinityProductList() {
+interface InfinityProductListType {
+  next: boolean;
+  last: boolean;
+  productIdList: InfinityProductDataType[];
+}
+
+interface InfinityProductDataType {
+  id: number;
+  productId: number;
+}
+
+function InfinityProductList({
+  apiType,
+  id
+}: {
+  apiType: string;
+  id: number
+}) {
+
+  const url = useSearchParams();
+  const currentUrl = url.toString();
+
+  const divRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState<number>(0);
   const [productIdList, setProductIdList] = useState<number[]>([]);
-  const divRef = useRef<HTMLDivElement>(null);
-  // console.log(productList);
 
-  async function getProductIdList() {
+  const getProductIdList = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/large-category-paged/1?page=${page}`,
-        { cache: "no-cache" }
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      if (data.data.next) {
-        const productIds = data.data.productIdList.map(
+      const productsData: InfinityProductListType = await getInfinityCtgProductList(apiType, id, page) as InfinityProductListType;
+      if (productsData.next || productsData.last) {
+        const productIds = productsData.productIdList.map(
           (product: { productId: number }) => product.productId
         );
         const updatedProductList = [...productIdList, ...productIds];
+        console.log('짠')
         setProductIdList(updatedProductList);
       } else {
         console.log("데이터 없음");
       }
-
       return;
     } catch (error) {
       console.error("Error:", error);
     }
-  }
+  };
+
+  useEffect(() => {
+    getProductIdList();
+  }, [page, id, currentUrl]);
+
+  useEffect(() => {
+    setPage(1);
+    setProductIdList([]);
+  }, [id]);
+
   useEffect(() => {
     // Intersection Observer 생성
     const observer = new IntersectionObserver(
@@ -51,12 +77,10 @@ function InfinityProductList() {
         threshold: 0,
       }
     );
-
     // Intersection Observer에 감시할 요소 등록
     if (divRef.current) {
       observer.observe(divRef.current);
     }
-
     // 컴포넌트가 unmount될 때 Intersection Observer 해제
     return () => {
       if (divRef.current) {
@@ -64,10 +88,6 @@ function InfinityProductList() {
       }
     };
   }, [setPage]);
-
-  useEffect(() => {
-    getProductIdList();
-  }, [page]);
 
   return (
     <div className="grid-cols-custom grid gap-y-0 gap-x-2 ms-4 me-4 mb-10">

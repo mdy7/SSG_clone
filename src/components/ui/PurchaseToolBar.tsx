@@ -24,32 +24,35 @@ interface selectedOptionProductType {
 }
 
 export default function PurchaseToolBar({
-  // params,
-  selectedOptionProductId
+  params,
+  selectedOptionProductId,
+  getOptionList,
   // selectedOptionProductData,
 }: {
-  // params: { productId: number };
+  params: { productId: number };
   selectedOptionProductId: number;
+  getOptionList: (optionForm: FormData) => void;
   // selectedOptionProductData: selectedOptionProductType[];
+  // productOptionData:
 }) {
 
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
-  // const [completeProduct, setCompleteProduct] = useState<selectedOptionProductType | null>(null);
+  const [completeProduct, setCompleteProduct] = useState<selectedOptionProductType | null>(null);
 
   const handleOpenModal = () => {
     setOpenModal(true);
   };
 
-  // useEffect(() => {
-  //   const completeProduct = async () => {
-  //     const productId: selectedOptionProductType = await getCompleteProductId(selectedOptionProductId) as selectedOptionProductType;
-  //     setCompleteProduct(productId);
-  //   }
-  //   completeProduct();
-  // }, [openModal, selectedOptionProductId]);
+  useEffect(() => {
+    const completeProduct = async () => {
+      const productId: selectedOptionProductType = await getCompleteProductId(selectedOptionProductId) as selectedOptionProductType;
+      setCompleteProduct(productId);
+    }
+    completeProduct();
+  }, [openModal, selectedOptionProductId]);
 
-  // console.log(selectedOptionProductId)
+  console.log(selectedOptionProductId)
 
 
   return (

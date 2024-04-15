@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+'use client'
+
+import React, { useState, useRef, useEffect, LegacyRef } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import { categoryType } from '@/types/categoryType';
-// import SmallArrowIcon from '@/images/svgs/SmallArrowIcon';
 import getMCategoryData from '@/app/api/category/getMCategoryData';
 import getSCategoryData from '@/app/api/category/getsCategoryData';
 import getDCategoryData from '@/app/api/category/getDcategoryData';
@@ -11,7 +12,7 @@ export default function SubCategorySlideButton() {
 
   const currentUrl = useSearchParams();
 
-  const buttonRefs = useRef<HTMLButtonElement[]>([]);
+  const buttonRefs = useRef<HTMLParagraphElement[]>([]);
   const [isSelected, setIsSelected] = useState<string | null>(null);
   const [categoryList, setCategoryList] = useState<categoryType[]>([]);
 
@@ -22,7 +23,6 @@ export default function SubCategorySlideButton() {
 
   let lastParamId = '';
   let lastParamName = '';
-  // const url = new URL(window.location.href);
   const params = currentUrl;
 
   const entries = Array.from(params.entries());
@@ -35,9 +35,7 @@ export default function SubCategorySlideButton() {
     }
   }
 
-
   const lastCtgName = params.get(lastParamName) || '';
-
   const getCtgData = async () => {
     if (lCtgId && mCtgId && sCtgId && dCtgId) {
       const dCtgData: categoryType[] = await getDCategoryData(Number(sCtgId)) as categoryType[];
@@ -70,41 +68,40 @@ export default function SubCategorySlideButton() {
 
   const handleCategoryClick = (categoryName: string, index: number) => {
     const selectedCategory = categoryList.find(category => category.name === categoryName);
-
     if (selectedCategory) {
       setIsSelected(selectedCategory.id);
 
       if (buttonRefs.current[index]) {
         buttonRefs.current[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }
-    }
+      };
 
-    if (lastParamId) {
-      params.set();
-    }
-    if (lastParamName) {
-      params.set();
-    }
+      const params = new URLSearchParams(window.location.search);
+      params.set(lastParamId, selectedCategory.id.toString());
+      params.set(lastParamName, selectedCategory.name);
 
-    window.history.pushState({}, '', currentUrl.toString());
+      const newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + params.toString();
+
+      window.history.pushState({}, '', newUrl);
+    }
   };
-
   return (
     <div className='w-full col-start-2 col-end-auto ms-[(1rem)*-1] me-[(1rem)*-1] top-[46px] bg-white'>
       <div className='flex-start flex-shrink-0 align-middle relative'>
         <div className='h-[56px] overflow-hidden text-nowrap flex'>
-          <div className='flex-nowrap pt-[10px] pb-[10px] ps-3 pe-1 overflow-scroll'>
+          <ul className='flex flex-nowrap pt-[10px] pb-[10px] ps-3 pe-1 overflow-scroll'>
             {categoryList.map((category, idx) => (
-              <button
+              <li
                 key={idx}
-                ref={el => buttonRefs.current[idx] = el!}
+                ref={buttonRefs.current[idx] as object as LegacyRef<HTMLLIElement>} // Change the type to HTMLLIElement
                 onClick={() => { handleCategoryClick(category.name, idx) }}
-                className={`min-w-min h-[36px] text-xs font-semibold mr-[5px] pl-2 pr-2
+                className={`min-w-min h-[36px] text-xs font-semibold mr-[5px] pl-2 pr-2 pt-3
                 ${isSelected === category.id ? 'bg-black text-white border-black' : 'bg-gray-100  text-black'}`}>
-                {category.name}
-              </button>
+                <p>
+                  {category.name}
+                </p>
+              </li>
             ))}
-          </div>
+          </ul>
           {/* <div className='bg-white top-[10px] absolute bottom-[10px] right-0 pr-4'>
             <button
               className='min-w-9 min-h-9 rotate-90 inline-flex items-center justify-center text-sm border border-gray-200'>

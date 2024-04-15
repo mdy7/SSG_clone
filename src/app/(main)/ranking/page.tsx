@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 
-import LargeCategorySlideButton from '@/components/layouts/lCategorySlideButton';
+import LargeCategorySlideButton from '@/components/layouts/LCategoryProductList';
 import SpecailPrice from '@/components/widgets/SpecailPrice';
 import TabList from '@/components/widgets/TabList';
 import ProductList from '@/components/layouts/ProductList';
@@ -19,7 +19,7 @@ export default function page() {
   return (
     <div className="w-full h-100">
       <TabList TablistTitles={TablistTitles} />
-      <InfinityProductList />
+      <InfinityProductList apiType={'large-category-paged'} id={1}/>
     </div>
   )
 }

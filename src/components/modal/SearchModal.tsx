@@ -3,6 +3,14 @@ import React, { useState } from 'react';
 
 import SmallArrowIcon from '@/images/svgs/SmallArrowIcon';
 import CartIcon from '@/images/svgs/CartIcon';
+import { Viewport } from 'next';
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export default function SearchModal({ onClose }: { onClose: () => void }) {
 

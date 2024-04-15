@@ -1,4 +1,5 @@
 import { commonResType } from "@/types/commonResType";
+
 const getInfinityCtgProductList = async (
   apiType: string,
   productId: number,
@@ -6,7 +7,7 @@ const getInfinityCtgProductList = async (
 ) => {
   try {
     'use server'
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${apiType}/${productId}?page=${page}`, { cache: 'no-cache' });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/product/${apiType}/${productId}?page=${page}`, { cache: "reload" });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
