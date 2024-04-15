@@ -68,7 +68,7 @@ export default function Product({id}: {id: number}) {
             <div className='flex flex-col'>
               <em className='mt-0 -me-0 mb-0 ms-[0.25rem] not-italic font-semibold'>
                 <span className='border-0 w-[1px] h-[1px] -my-px -mx-px px-0 py-0 overflow-hidden whitespace-nowrap absolute'>판매가격</span>
-                {productData.price}원
+                {productData.price.toLocaleString()}원
               </em>
             </div>
           ) : (
