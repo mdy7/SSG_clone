@@ -10,7 +10,7 @@
 
 </div>
 
-- FE Github https://github.com/2-Nocaffeine/Frontend
+- FE Github https://github.com/2-Nocaffeine/Frontend-noCaffeine
 - BE Github https://github.com/2-Nocaffeine/Backend
 
 - 배포 URL : https://www.nocaffeine.shop
