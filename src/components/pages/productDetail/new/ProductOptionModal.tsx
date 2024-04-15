@@ -29,7 +29,7 @@ function ProductOptionModal({
   getOptionList,
   productOptionData,
 }: {
-  params: { productId: string };
+  params: { productId: number };
   modalClose: () => void;
   getOptionList: (optionForm: FormData) => void;
   productOptionData: ProductOptionsAvailableType;
