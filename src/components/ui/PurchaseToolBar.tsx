@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-
-import HeartIcon from '@/images/svgs/HeartIcon';
 import getCompleteProductId from '@/app/api/product/getCompleteProductId';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -28,17 +26,21 @@ export default function PurchaseToolBar({
   params,
   selectedOptionProductId,
   // selectedOptionProductData,
+  getOptionList,
+  productOptionData,
 }: {
   params: { productId: number };
   selectedOptionProductId: number;
   // selectedOptionProductData: selectedOptionProductType[];
+  getOptionList: (optionForm: FormData) => void;
+  productOptionData: { Color: boolean, Size: boolean, AddOption: boolean };
 }) {
 
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [completeProduct, setCompleteProduct] = useState<selectedOptionProductType | null>(null);
   const productId = params.productId;
-  
+  const [productCnt, setProductCnt] = useState(0);
   const handleOpenModal = () => {
     setOpenModal(true);
   };
@@ -70,8 +72,8 @@ export default function PurchaseToolBar({
                   href={{
                     pathname: `/cart`,
                     query: {
-                      productId: 21, 
-                      cnt: 2
+                      productId: productId, 
+                      cnt: productCnt
                     }
                   }}
                   passHref>
@@ -85,7 +87,7 @@ export default function PurchaseToolBar({
                     pathname: `/order`,
                     query: {
                       productId: productId,
-                      cnt: 2
+                      cnt: productCnt
                     }
                   }}
                   passHref>
@@ -114,12 +116,13 @@ export default function PurchaseToolBar({
         className={`fixed z-[10] left-0 right-0 pb-3 transition-all
         ${openModal ? 'bottom-10 ease-in-out' : '-bottom-[500px] easy-out-in'}`}
       >
-        {/* <ProductOptionModal
+        <ProductOptionModal
           params={params}
           modalClose={handleCloseModal}
           getOptionList={getOptionList}
           productOptionData={productOptionData} 
-          /> */}
+          setProductCnt={setProductCnt}
+          />
       </div>
     </>
   );
