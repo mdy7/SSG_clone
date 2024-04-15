@@ -27,7 +27,7 @@ function InfinityProductList() {
         const updatedProductList = [...productIdList, ...productIds];
         setProductIdList(updatedProductList);
       } else {
-        console.log("데이터 없음");
+        // console.log("데이터 없음");
       }
 
       return;

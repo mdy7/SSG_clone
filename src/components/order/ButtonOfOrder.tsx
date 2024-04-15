@@ -31,7 +31,7 @@ export default function ButtonOfOrder({
     price: discountedPrices[index],
   }));
 
-  console.log(orderProducts);
+  // console.log(orderProducts);
   const handleButtonClick = async () => {
     try {
       if (token) {
@@ -57,9 +57,9 @@ export default function ButtonOfOrder({
 
         if (response.ok) {
           // API 호출 성공 시 처리할 로직 작성
-          console.log("API 호출 성공");
+          // console.log("API 호출 성공");
           const data = await response.json();
-          console.log("data:", data);
+          // console.log("data:", data);
           // setOrderId(data.data.orderId);
           router.push(`/order/complete?orderId=${data.data.orderId}`)
         } else {

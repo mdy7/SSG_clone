@@ -42,7 +42,7 @@ function ProductOptionModal({
   const setIsLastOptionSelected = useSetRecoilState(selectedOptionsState); // 선택된 옵션들을 저장하는 상태
   const [isLastOption, setIsLastOption] = useState(false);
 
-  console.log(currentSelection);
+  // console.log(currentSelection);
 
   useEffect(() => {
     const allOptionsSelected = Object.values(currentSelection).every(selection => selection !== null);
