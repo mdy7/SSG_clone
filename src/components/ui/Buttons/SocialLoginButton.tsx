@@ -8,7 +8,7 @@ import { signIn } from 'next-auth/react';
 
 export default function SocialLoginButton() {
   const param = useSearchParams();
-  console.log(param.get('callbackUrl'))
+  // console.log(param.get('callbackUrl'))
   const callbackUrl = param.get('callbackUrl');
 
   return (

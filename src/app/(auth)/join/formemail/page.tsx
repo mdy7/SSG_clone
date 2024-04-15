@@ -4,8 +4,6 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { Suspense, useState } from 'react';
 
-import RedButton from '@/components/ui/Buttons/RedButton';
-
 function JoinPage() {
   const router = useRouter();
   const email = useSearchParams();
@@ -13,9 +11,24 @@ function JoinPage() {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [selectedOption, setSelectedOption] = useState('010');
+  const [passwordCheck, setPasswordCheck] = useState('')
+  const [passwordError, setPasswordError] = useState(false)
+
+  const handlePasswordCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordCheck(e.target.value);
+    if (password !== e.target.value) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (passwordError) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return 0;
+    }
     const fullPhoneNumber = `${selectedOption}${phoneNumber}`;
 
     const userData = {
@@ -25,7 +38,7 @@ function JoinPage() {
       phoneNumber: fullPhoneNumber,
     };
 
-    console.log(userData);
+    // console.log(userData);
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/join`, {
       method: 'POST',
@@ -40,7 +53,10 @@ function JoinPage() {
     }
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
+    if(data.success){
+      router.push('/memberlogin');
+    }
   };
 
   function openPopup(url: string) {
@@ -99,7 +115,7 @@ function JoinPage() {
               </dd>
             </dl>
           </div>
-          <div className='w-full h-[120.8px] py-[15px] flex justify-center items-center border-t-[0.8px] border-neutral-200'>
+          <div className='w-full h-[130.8px] pt-[10px] pb-[20px] flex justify-center items-center border-t-[0.8px] border-neutral-200'>
             <dl className='w-full h-[90px] font-sans-serif text-zinc-600 font-normal text-[13px] flex'>
               <dt className='w-[87px] h-10 pl-[7px] pt-[9px] font-sans-serif'><span className='text-red-500 font-sans-serif'>*</span>비밀번호</dt>
               <dd className='w-full flex-col justify-between items-center'>
@@ -112,9 +128,12 @@ function JoinPage() {
                 </div>
                 <div className='w-full h-10 pr-25 justify-center items-center pl-4'>
                   <span><input type='text'
+                    onChange={handlePasswordCheckChange}
                     className="w-full h-10 py-[10px] px-[11px] border-[0.8px] border-neutral-300 font-sans-serif"
                     placeholder='비밀번호 재확인'></input></span>
+                  {passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
                 </div>
+
               </dd>
             </dl>
           </div>
@@ -189,11 +208,9 @@ function JoinPage() {
           </div>
         </div>
         <div className="w-full h-full mb-[30px]">
-          <Link
-            href={'/memberlogin'}
-            passHref>
-            <RedButton title='확인' />
-          </Link>
+            <button type='submit' className="w-full h-[50px] bg-rose-500 flex justify-center items-center">
+              <div className="text-white text-base font-medium font-sans-serif">확인</div>
+            </button>
         </div>
       </form>
     </div>

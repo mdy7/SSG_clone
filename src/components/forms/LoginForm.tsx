@@ -15,7 +15,7 @@ export default function LoginForm() {
   // console.log('session:', session);
 
   useEffect(() => {
-    console.log("session:",session)
+    // console.log("session:",session)
   }, [session])
 
   const [payload, setPayload] = useState<LoginFormType>({
@@ -23,13 +23,13 @@ export default function LoginForm() {
     password: ''
   })
 
-  const logInSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const logInSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!payload.email && !payload.password) {
       return alert('아이디와 비밀번호를 입력해주세요.')
     }
-    console.log("payload:", payload)
-    const res = fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`, {
+    // console.log("payload:", payload)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -37,6 +37,11 @@ export default function LoginForm() {
       body: JSON.stringify(payload)
     })
     // console.log("res:", res)
+    const data = await res.json()
+    if(!data.success) {
+      return alert('아이디와 비밀번호를 확인해주세요.')
+    }
+
     signIn('credentials', {
       email: payload.email,
       password: payload.password,

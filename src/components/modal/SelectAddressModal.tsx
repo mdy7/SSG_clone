@@ -57,7 +57,7 @@ function SelectAddressModal({
 
         if (response.ok) {
           // API 호출 성공 시 처리할 로직 작성
-          console.log('API 호출 성공');
+          // console.log('API 호출 성공');
           handleClose();
         } else {
           console.error('API 호출 실패');

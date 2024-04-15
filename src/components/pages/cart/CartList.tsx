@@ -61,7 +61,7 @@ export default function CartList() {
     const [allChecked, setAllChecked] = useState(false)
     const [checkedItem, setCheckedItem] = useState<number[]>([])
     const checkItemhandler = (id: number, ischecked: boolean) => {
-        console.log(id, ischecked)
+        // console.log(id, ischecked)
         if (ischecked) {
             setCheckedItem((prev) => [...prev, id])
         } else {
@@ -75,7 +75,7 @@ export default function CartList() {
         } else {
             setCheckedItem([])
         }
-        console.log(checkedItem)
+        // console.log(checkedItem)
     }
     const isKeepHandle = (id: number, isKeep: number) => {
         if (isKeep == 99) {
@@ -95,7 +95,7 @@ export default function CartList() {
             })
             setFilteredProductList(updatedFilteredProductList)
         }
-        console.log(filteredProductList)
+        // console.log(filteredProductList)
     }
 
     return (

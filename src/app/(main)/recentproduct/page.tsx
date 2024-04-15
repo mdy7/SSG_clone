@@ -35,7 +35,7 @@ export default function Recent() {
         setDeleted(!deleted)
     }
     const checkItemhandler = (id: number, ischecked: boolean) => {
-        console.log(id, ischecked)
+        // console.log(id, ischecked)
         if (ischecked) {
             setCheckedItem((prev) => [...prev, id])
         } else {

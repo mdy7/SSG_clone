@@ -35,7 +35,7 @@ const getData: DataFunction = async (url: string) => {
 export default async function SpecialPriceDetailPage({ params }: { params: { specialpriceId: number } }) {
   // console.log("url:", (params.specialpriceId));
   const SpecialPriceData: SpecailPriceDetailType = await getData(`/special/${params.specialpriceId}/product-list`) as SpecailPriceDetailType;
-  console.log("SpecialPriceData:", SpecialPriceData);
+  // console.log("SpecialPriceData:", SpecialPriceData);
   return (
     <div>
       <ProductDetailNavToolBar

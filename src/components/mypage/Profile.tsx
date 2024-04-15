@@ -23,7 +23,7 @@ function Profile() {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log("data:", data);
+                // console.log("data:", data);
                 setName(data.data.name);
                 // return data.data;
             } catch (error) {

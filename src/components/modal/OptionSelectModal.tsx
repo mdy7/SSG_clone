@@ -80,17 +80,17 @@ export default function OptionSelectModal({
   }, [optionNames, setOptionList]);
 
   useEffect(() => {
-    console.log('OptionSelectModal', selectedOption);
-    console.log(optionNames);
+    // console.log('OptionSelectModal', selectedOption);
+    // console.log(optionNames);
     if (!selectedOption) return;
     if (selectedOption.id === optionNames.length - 1) {
-      console.log('옵션 선택 완료');
+      // console.log('옵션 선택 완료');
       const getLastSelectData = async () => {
         const res = await fetch(
           `https://nocaffein.shop/api/v1/option-selected-product/selected-options-list?product=${productId}&color=${selectedOptions[0].id}&size=${selectedOptions[1].id}&addOption=${selectedOptions[2].id}`
         );
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
       };
       getLastSelectData();
       return;
@@ -99,7 +99,7 @@ export default function OptionSelectModal({
     const getData = async (productId: string, optionType: string) => {
       const res: any = await getColorOptionList(productId, optionType);
       setOptionListData(res);
-      console.log(res);
+      // console.log(res);
     };
 
     getData(productId, optionName.toLowerCase());

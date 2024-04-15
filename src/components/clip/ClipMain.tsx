@@ -41,7 +41,7 @@ export default function ClipMain({folderId}: {folderId: number}) {
     }).then((res) => res.json())
       .then((data) => {
         setLikeListData(data.data); // likeListData state를 업데이트합니다.
-        console.log("likeListData:", likeListData);
+        // console.log("likeListData:", likeListData);
         const initialClicks = data?.reduce((acc: { [x: string]: boolean }, item: { id: string | number }) => {
           acc[item.id] = false;
           return acc;

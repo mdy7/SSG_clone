@@ -41,7 +41,7 @@ export default function AuthInput() {
         if (response.ok) {
             // 응답 처리
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
 
         } else {
             // 오류 처리
@@ -56,7 +56,7 @@ export default function AuthInput() {
         await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/email?email=${requestPayload.email}&code=${verifyPayload.authCode}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.success === true) {
                     alert('인증에 성공했습니다.')
                     router.push(`/join/formemail?email=${requestPayload.email}`)

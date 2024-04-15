@@ -53,7 +53,7 @@ export default function ClipHeader() {
         // console.log("itemId:", data.data?.productId);
         // console.log("liked:", data.data?.like);
         setLikeFolderListData(data.data);
-        console.log("likeFolderListData:", likeFolderListData);
+        // console.log("likeFolderListData:", likeFolderListData);
       });
   }, [token]);
 
