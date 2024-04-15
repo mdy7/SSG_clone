@@ -35,8 +35,8 @@ function MyPageBanner() {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                <div className="absolute bottom-0 right-0 z-10 text-white text-sm bg-black  px-3 py-1  bg-opacity-80  rounded ">
-                    <div className="swiper-pagination  "></div>
+                <div className="absolute bottom-0 right-0 w-15 h-7 z-10 text-white text-sm bg-black px-3 py-1 bg-opacity-80 rounded">
+                    <div className="swiper-pagination"></div>
                 </div>
             </div>
         </section>

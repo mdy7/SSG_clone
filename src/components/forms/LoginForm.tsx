@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link";
 import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 
 import { LoginFormType } from "@/types/formType";
@@ -13,7 +13,10 @@ export default function LoginForm() {
   // console.log(param.get('callbackUrl'))
   const callbackUrl = param.get('callbackUrl');
   // console.log('session:', session);
-
+  
+  if(session) {
+    useRouter().push(callbackUrl ? callbackUrl : '/')
+  }
   useEffect(() => {
     // console.log("session:",session)
   }, [session])

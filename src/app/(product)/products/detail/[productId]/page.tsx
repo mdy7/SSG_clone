@@ -65,7 +65,7 @@ export default async function ProductDetailPage({
       <ProductDetailContent params={params} />
       <ProductDetailBottom />
       <PurchaseToolBar
-        // params={params}
+        params={params}
         selectedOptionProductId={0}
       // getOptionList={getOptionList}
       // productOptionData={productOptiondata}

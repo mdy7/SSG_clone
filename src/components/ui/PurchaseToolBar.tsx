@@ -7,6 +7,7 @@ import getCompleteProductId from '@/app/api/product/getCompleteProductId';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ProductOptionModal from '../pages/productDetail/new/ProductOptionModal';
+import Clip from './Item/Clip';
 
 interface selectedOptionProductType {
   optionSelectedProductId: number,
@@ -24,32 +25,37 @@ interface selectedOptionProductType {
 }
 
 export default function PurchaseToolBar({
-  // params,
-  selectedOptionProductId
+  params,
+  selectedOptionProductId,
   // selectedOptionProductData,
 }: {
-  // params: { productId: number };
+  params: { productId: number };
   selectedOptionProductId: number;
   // selectedOptionProductData: selectedOptionProductType[];
 }) {
 
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
-  // const [completeProduct, setCompleteProduct] = useState<selectedOptionProductType | null>(null);
-
+  const [completeProduct, setCompleteProduct] = useState<selectedOptionProductType | null>(null);
+  const productId = params.productId;
+  
   const handleOpenModal = () => {
     setOpenModal(true);
   };
 
-  // useEffect(() => {
-  //   const completeProduct = async () => {
-  //     const productId: selectedOptionProductType = await getCompleteProductId(selectedOptionProductId) as selectedOptionProductType;
-  //     setCompleteProduct(productId);
-  //   }
-  //   completeProduct();
-  // }, [openModal, selectedOptionProductId]);
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  }
 
-  // console.log(selectedOptionProductId)
+  useEffect(() => {
+    const completeProduct = async () => {
+      const productId: selectedOptionProductType = await getCompleteProductId(selectedOptionProductId) as selectedOptionProductType;
+      setCompleteProduct(productId);
+    }
+    completeProduct();
+  }, [openModal, selectedOptionProductId]);
+
+  console.log(selectedOptionProductId)
 
 
   return (
@@ -78,7 +84,7 @@ export default function PurchaseToolBar({
                   href={{
                     pathname: `/order`,
                     query: {
-                      productId: 21, 
+                      productId: productId,
                       cnt: 2
                     }
                   }}
@@ -91,7 +97,7 @@ export default function PurchaseToolBar({
             <>
               <div className="px-3 py-2 border-gray-300 border">
                 <div className="w-7 pt-1">
-                  <HeartIcon />
+                <Clip productId={params.productId}/>
                 </div>
               </div>
               <div
@@ -104,17 +110,17 @@ export default function PurchaseToolBar({
           )}
         </div>
       </div>
-      {/* <div
+      <div
         className={`fixed z-[10] left-0 right-0 pb-3 transition-all
         ${openModal ? 'bottom-10 ease-in-out' : '-bottom-[500px] easy-out-in'}`}
       >
-        <ProductOptionModal
+        {/* <ProductOptionModal
           params={params}
           modalClose={handleCloseModal}
           getOptionList={getOptionList}
           productOptionData={productOptionData} 
-          />
-      </div> */}
+          /> */}
+      </div>
     </>
   );
 }
