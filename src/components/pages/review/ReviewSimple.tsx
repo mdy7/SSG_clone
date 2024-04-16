@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+
 
 import FillStarIcon from '@/images/svgs/FillStarIcon';
 import { commonResType } from '@/types/commonResType';
@@ -18,19 +18,16 @@ interface reviews {
 }
 
 
-export default function ReviewSimple() {
-  const params = useParams();
-  console.log(params);
-
+export default function ReviewSimple({ productId }: { productId: number }){
   const [reviews, setReviews] = useState<reviews[]>([]);
   const [reviewDetail, setReviewDetail] = useState<reviews>();
-  
 
-  async function fetchReviewData() {
 
+  async function fetchReviewData(){
+    console.log(productId)
 
     try {
-      const response = await fetch(`https://nocaffein.shop/api/v1/review/product/${params.productId}`, { cache: 'no-cache' });
+      const response = await fetch(`https://nocaffein.shop/api/v1/review/product/${productId}`, { cache: 'no-cache' });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -46,19 +43,16 @@ export default function ReviewSimple() {
 
   console.log(reviews)
 
-// const reviewArr: reviews[] = [];
 const [reviewArr, setReviewArr] = useState<reviews[]>([]);
 
   async function fetchReviewDetail(reviewId: number) {
     const reviewResponse = await fetch(`https://nocaffein.shop/api/v1/review/${reviewId}`);
     const reviewData: commonResType = await reviewResponse.json() as commonResType;
     const reviewDetailData: reviews = reviewData.data as reviews;
-    // reviewArr.push(reviewDetailData);
     setReviewArr(prevReviewArr => [...prevReviewArr, reviewDetailData]);
   }
 
-  // console.log(fetchReviewDetail(reviews[1].reviewId));
-  
+    
 
   useEffect(() => {
     fetchReviewData();
@@ -69,8 +63,8 @@ const [reviewArr, setReviewArr] = useState<reviews[]>([]);
       fetchReviewDetail(review.reviewId);
     })}
   }, [reviews])
-  console.log(reviews)
-  console.log("revoewArr",reviewArr)
+  // console.log(reviews)
+  // console.log("revoewArr",reviewArr)
 
 
   // useEffect(() => {
@@ -141,7 +135,9 @@ const [reviewArr, setReviewArr] = useState<reviews[]>([]);
         </div>
         <ul className='relative border-t-[1px]'>
         {reviewArr.map((review, index) => (
-              <li className='mt-5 pl-0 border-t-0 border-b-[1px] pb-5'>
+              <li
+              key={index} 
+              className='mt-5 pl-0 border-t-0 border-b-[1px] pb-5'>
                 <div className='pr-5 block'>
                   <div className='flex items-center'>
                     <div className='flex items-center relative align-middle text-[12px]'>

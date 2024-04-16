@@ -27,7 +27,7 @@ export default async function ProductDetailContent({ params }: { params: { produ
         <ProductDetailInfoTitle title={"고객리뷰"} />
         <ReviewTotalScore />
         <ReviewImageList />
-        <ReviewSimple />
+        <ReviewSimple productId = {params.productId}/>
         <ShowMoreButton
           title='더보기'
           count={60} />
