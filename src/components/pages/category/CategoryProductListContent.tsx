@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import SubCategorySlideButton from '@/components/layouts/SubCategorySlideButton';
@@ -24,8 +24,6 @@ export default function CategoryProductListContent() {
 
   let apiType = '';
 
-  console.log('lastParamId:', lastParamId, 'ctgId:', ctgId)
-
   if (lastParamId == 'lCtgId') {
     apiType = 'large-category-paged';
   }
@@ -41,13 +39,12 @@ export default function CategoryProductListContent() {
 
   return (
     <>
-        {pathname.includes('all') ? '' : <SubCategorySlideButton />}
-        <SubCategoryTable />
-        <div className="col-start-2 col-end-auto">
-          <Suspense>
-            <InfinityProductList apiType={apiType} id={Number(ctgId)} />
-          </Suspense>
-        </div>
+      {pathname.includes('all') ? '' : <SubCategorySlideButton />}
+      <SubCategoryTable />
+      <div className="col-start-2 col-end-auto">
+        {pathname.includes('all') ?
+          <InfinityProductList apiType={apiType} id={Number(ctgId)} /> : ''}
+      </div>
     </>
   )
 }

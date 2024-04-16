@@ -102,14 +102,6 @@ export default function SubCategorySlideButton() {
               </li>
             ))}
           </ul>
-          {/* <div className='bg-white top-[10px] absolute bottom-[10px] right-0 pr-4'>
-            <button
-              className='min-w-9 min-h-9 rotate-90 inline-flex items-center justify-center text-sm border border-gray-200'>
-              <div className='w-[18px] h-[18px] text-black font-bold'>
-                <SmallArrowIcon />
-              </div>
-            </button>
-          </div> */}
         </div>
       </div>
     </div>

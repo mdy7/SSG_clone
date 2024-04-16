@@ -6,6 +6,7 @@ import InfinityClipCart from "./InfinityClipCart";
 import ProductInfo from "./ProductInfo";
 import getInfinityCtgProductList from "@/app/api/product/getInfinityCtgProductList";
 import { useSearchParams } from "next/navigation";
+import ReviewStat from "../ui/Item/ReviewStat";
 
 interface InfinityProductListType {
   next: boolean;
@@ -26,9 +27,6 @@ function InfinityProductList({
   id: number
 }) {
 
-  const url = useSearchParams();
-  const currentUrl = url.toString();
-
   const divRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState<number>(0);
   const [productIdList, setProductIdList] = useState<number[]>([]);
@@ -41,7 +39,6 @@ function InfinityProductList({
           (product: { productId: number }) => product.productId
         );
         const updatedProductList = [...productIdList, ...productIds];
-        console.log('짠')
         setProductIdList(updatedProductList);
       } else {
         console.log("데이터 없음");
@@ -54,7 +51,7 @@ function InfinityProductList({
 
   useEffect(() => {
     getProductIdList();
-  }, [page, id, currentUrl]);
+  }, [page, id]);
 
   useEffect(() => {
     setPage(1);
@@ -96,6 +93,7 @@ function InfinityProductList({
           <ProductImage id={item} />
           <InfinityClipCart productId={item} />
           <ProductInfo id={item} />
+          <ReviewStat />
         </div>
       ))}
       <div ref={divRef}></div>

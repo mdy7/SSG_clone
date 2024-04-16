@@ -8,15 +8,15 @@ import { options } from '@/app/api/auth/[...nextauth]/options'
 
 export default async function PopularProduct({
   id,
-  src,
-  store,
-  brand,
-  name,
-  price,
-  sale,
-  salePrice,
-  reviewRating,
-  reviewCount
+  // src,
+  // store,
+  // brand,
+  // name,
+  // price,
+  // sale,
+  // salePrice,
+  // reviewRating,
+  // reviewCount
 }: productDataType
 )
 {
@@ -28,9 +28,7 @@ export default async function PopularProduct({
     <div>
       <div className='relative pt-[0.625rem] pb-5'>
         <Thumnail id={id}/>
-        {/* --------좋아요/장바구니-------- */}
         <ClipCart productId={id}/>
-        {/* --------좋아요/장바구니-------- */}
         <Product id={id}/>
       </div>
     </div>

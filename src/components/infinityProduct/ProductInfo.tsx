@@ -48,7 +48,7 @@ function ProductInfo({ id }: { id: number }) {
   return (
     <>
       {brandName && productData && (
-        <div className="px-2">
+        <div>
           <p className="font-bold text-xs">{brandName.brandName}</p>{" "}
           <p className="text-slate-600 text-[0.8rem] line-clamp-2">
             {productData.name}

@@ -24,14 +24,14 @@ interface selectedOptionProductType {
 }
 
 export default function PurchaseToolBar({
-  params,
+  // params,
   selectedOptionProductId,
-  getOptionList,
+  // getOptionList,
   // selectedOptionProductData,
 }: {
-  params: { productId: number };
+  // params: { productId: number };
   selectedOptionProductId: number;
-  getOptionList: (optionForm: FormData) => void;
+  // getOptionList: (optionForm: FormData) => void;
   // selectedOptionProductData: selectedOptionProductType[];
   // productOptionData:
 }) {

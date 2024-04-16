@@ -65,9 +65,9 @@ console.log(productOptiondata)
       <ProductDetailContent params={params} />
       <ProductDetailBottom />
       <PurchaseToolBar
-        params={params}
+        // params={params}
         selectedOptionProductId={0}
-        getOptionList={getOptionList}
+        // getOptionList={getOptionList}
         // productOptionData={productOptiondata}
       />
     </>
