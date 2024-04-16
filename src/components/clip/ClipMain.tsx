@@ -115,7 +115,7 @@ export default function ClipMain({folderId}: {folderId: number}) {
         ) : (
           <div className="flex flex-row justify-between items-center mb-2">
             <ClipInfoButton />
-            <ClipEditButton onEditMode={() => handleEditMode()} />
+            {/* <ClipEditButton onEditMode={() => handleEditMode()} /> */}
           </div>
         )}
         {isEditMode && <EditBar token={token} clickItemIds={clickItemIds} />}
