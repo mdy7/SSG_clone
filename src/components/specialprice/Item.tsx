@@ -6,6 +6,7 @@ import Clip from "../ui/Item/Clip";
 import { productType } from "@/types/productType";
 import Image from "next/image";
 import { ThumnailType } from "@/types/ThumnailType";
+import ProductOptionModal2 from "../pages/productDetail/new/ProductOptionModal2";
 
 interface ItemProps {
   productId: number;
@@ -38,6 +39,15 @@ const getData = (url: string) => {
 export default function Item({ productId, index }: ItemProps) {
   const [product, setProduct] = useState<productType | null>(null);
   const [thumnail, setThumbnail] = useState<ThumnailType | null>(null);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  }
 
   useEffect(() => {
     getData(`/product/${productId}/thumbnail`)
@@ -82,10 +92,14 @@ export default function Item({ productId, index }: ItemProps) {
       </div>
       <div className="flex justify-end items-end">
         <div className="flex justify-center items-center">
-          <button className="w-[146px] h-8 border-black border-[1px] text-[12px]">
+          <button className="w-[146px] h-8 border-black border-[1px] text-[12px]" onClick={handleOpenModal}>
             <span>상품 선택하기</span>
           </button>
           <Clip productId={productId} />
+          {openModal && <ProductOptionModal2
+          productId={productId}
+          modalClose={handleCloseModal}
+          />}
         </div>
       </div>
     </div>

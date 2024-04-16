@@ -42,7 +42,7 @@ export default function ClipMain({folderId}: {folderId: number}) {
       .then((data) => {
         setLikeListData(data.data); // likeListData state를 업데이트합니다.
         // console.log("likeListData:", likeListData);
-        const initialClicks = data?.reduce((acc: { [x: string]: boolean }, item: { id: string | number }) => {
+        const initialClicks = data?.data?.reduce((acc: { [x: string]: boolean }, item: { id: string | number }) => {
           acc[item.id] = false;
           return acc;
         }, {} as { [key: number]: boolean });
@@ -115,7 +115,7 @@ export default function ClipMain({folderId}: {folderId: number}) {
         ) : (
           <div className="flex flex-row justify-between items-center mb-2">
             <ClipInfoButton />
-            <ClipEditButton onEditMode={() => handleEditMode()} />
+            {/* <ClipEditButton onEditMode={() => handleEditMode()} /> */}
           </div>
         )}
         {isEditMode && <EditBar token={token} clickItemIds={clickItemIds} />}
