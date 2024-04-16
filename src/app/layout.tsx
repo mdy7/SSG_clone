@@ -1,12 +1,10 @@
+import { Suspense } from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
 import './globals.css';
 import AuthProvider from '@/components/provider/AuthProvider';
 import RecoilProvider from '@/components/provider/RecoilProvider';
-import TopHeader from '@/components/layouts/TopHeader';
-import BottomHeader from '@/components/layouts/BottomHeader';
-import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 

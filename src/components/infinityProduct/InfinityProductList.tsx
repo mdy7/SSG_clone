@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+
 import ProductImage from "./ProductImage";
 import InfinityClipCart from "./InfinityClipCart";
 import ProductInfo from "./ProductInfo";
 import getInfinityCtgProductList from "@/app/api/product/getInfinityCtgProductList";
-import { useSearchParams } from "next/navigation";
 import ReviewStat from "../ui/Item/ReviewStat";
 
 interface InfinityProductListType {
@@ -41,7 +41,7 @@ function InfinityProductList({
         const updatedProductList = [...productIdList, ...productIds];
         setProductIdList(updatedProductList);
       } else {
-        // console.log("데이터 없음");
+        console.log("데이터 없음");
       }
       return;
     } catch (error) {

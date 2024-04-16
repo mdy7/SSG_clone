@@ -1,9 +1,11 @@
 'use client'
+
 import Link from "next/link";
-import "./clip.css";
-import { useEffect, useState } from "react";
-import ClipModal from "../modal/ClipModal";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+
+import "./clip.css";
+import ClipModal from "../modal/ClipModal";
 import FolderModal from "../modal/FolderModal";
 
 type FolderType = {

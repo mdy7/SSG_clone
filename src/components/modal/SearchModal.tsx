@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import SmallArrowIcon from '@/images/svgs/SmallArrowIcon';
 import CartIcon from '@/images/svgs/CartIcon';
@@ -15,10 +15,9 @@ export const viewport: Viewport = {
 
 export default function SearchModal({ onClose }: { onClose: () => void }) {
 
-  const [searchValue, setSearchValue] = useState('');
-
-  const handleSearch = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setSearchValue(e.target.value)
+  const handleSearch = (e: React.MouseEvent<HTMLDivElement>) => {
+    alert('사용할 수 없는 기능입니다.');
+    e.preventDefault();
   }
 
   return (
@@ -39,9 +38,10 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
             type="text"
             placeholder='원하시는 상품을 검색해보세요.'
             className='min-w-0 relative ps-4 pe-10 pl-4 bg-gray-100 w-full h-10  pr-11 rounded-3xl text-sm'
-            onChange={handleSearch}
-            value={searchValue} />
+            onClick={(e) => handleSearch(e)}
+          />
           <div
+            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleSearch(e)}
             className='"pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" clipRule="evenodd" d="M7.60004 14.8C7.60004 18.76 10.84 22 14.8 22C18.76 22 22 18.76 22 14.8C22 10.84 18.76 7.60001 14.8 7.60001C10.84 7.60001 7.60004 10.84 7.60004 14.8ZM8.80007 14.8C8.80007 11.44 11.4401 8.80001 14.8001 8.80001C18.1601 8.80001 20.8001 11.44 20.8001 14.8C20.8001 18.16 18.1601 20.8 14.8001 20.8C11.4401 20.8 8.80007 18.16 8.80007 14.8Z" fill="black" />
@@ -59,9 +59,6 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
             <div className='flex ms-[15px] me-[15px] justify-between'>
               <h3 className='text-sm font-black'>최근 검색어</h3>
               <button className='inline h-auto text-[11px] font-normal text-gray-400'>전체삭제</button>
-            </div>
-            <div className='flex items-center justify-start flex-row overflow-x-auto mt-[10px] mb-[10px] ps-4 pe-4'>
-              {/* 최근 검색어 들어갈 내용 */}
             </div>
           </div>
         </div>

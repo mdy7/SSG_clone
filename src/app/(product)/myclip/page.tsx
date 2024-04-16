@@ -1,11 +1,12 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
-import "./clip.css";
-import ClipHeader from "@/components/clip/ClipHeader";
-import ClipMain from "@/components/clip/ClipMain";
-import ClipNavbar from "@/components/clip/ClipNavbar";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+
+import "./clip.css";
+import ClipMain from "@/components/clip/ClipMain";
+import ClipNavbar from "@/components/clip/ClipNavbar";
 import ClipModal from "@/components/modal/ClipModal";
 import FolderModal from "@/components/modal/FolderModal";
 
