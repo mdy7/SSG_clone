@@ -81,6 +81,7 @@ function ProductOptionModal2({
           <ProductDetailTotalPrice totalPrice={totalPrice} />
         </div>
       </div>
+      <div className='flex'>
       <div
         className="w-full h-[52px] pt-4 flex bg-black justify-center">
         <Link
@@ -108,6 +109,7 @@ function ProductOptionModal2({
           passHref>
           <span className="text-white text-[16px]">바로 구매</span>
         </Link>
+      </div>
       </div>
     </div>
   );
