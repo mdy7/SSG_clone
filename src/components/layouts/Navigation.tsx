@@ -20,7 +20,7 @@ export default function Navigation() {
       id: 2,
       icon: <GiftboxIcon />,
       text: '선물하기',
-      link: '#'
+      link: '/ready'
     },
     {
       id: 3,
@@ -38,7 +38,7 @@ export default function Navigation() {
       id: 5,
       icon: <EyeIcon />,
       text: '최근본',
-      link: '/recentproduct'
+      link: '/ready'
     }
   ]
 
