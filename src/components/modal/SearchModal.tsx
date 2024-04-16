@@ -49,9 +49,11 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
             </svg>
           </div>
         </form>
-        <div className='mx-1'>
-          <CartIcon />
-        </div>
+        <Link href='/ready'>
+          <div className='mx-1'>
+            <CartIcon />
+          </div>
+        </Link>
       </div>
       <div>
         <div className='ms-4 me-4'>

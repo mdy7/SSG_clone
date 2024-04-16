@@ -38,6 +38,6 @@ export const mainNavMenuData: navType[] = [
     id: 7,
     title: '브랜드',
     // url: '/ssgbrand'
-    url: '/'
+    url: '/ready'
   },
 ]
