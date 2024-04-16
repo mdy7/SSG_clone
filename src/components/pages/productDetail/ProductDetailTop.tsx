@@ -19,15 +19,9 @@ export default async function ProductDetailTop({
 }: {
   params: { productId: number };
 }) {
-  const productData: detailProductType = (await getProductData(
-    params.productId
-  )) as detailProductType;
-  const brandData: productBrandType = (await getProductBrandData(
-    params.productId
-  )) as productBrandType;
-  const imgData: productImageType[] = (await getProductImageData(
-    params.productId
-  )) as productImageType[];
+  const productData: detailProductType = await getProductData(params.productId) as detailProductType;
+  const brandData: productBrandType = await getProductBrandData(params.productId) as productBrandType;
+  const imgData: productImageType[] = await getProductImageData(params.productId) as productImageType[];
 
   return (
     <>

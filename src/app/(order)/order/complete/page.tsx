@@ -1,11 +1,13 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense, useEffect, useState } from "react";
-import HeaderToHome from "@/components/ui/Headers/HeaderToHome";
-import DetailsOfPaymoney from "@/components/order/DetailsOfPaymoney";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Suspense, useEffect, useState } from "react";
+
+import HeaderToHome from "@/components/ui/Headers/HeaderToHome";
+import DetailsOfPaymoney from "@/components/order/DetailsOfPaymoney";
 import { OrderInformationType } from "@/types/OrderInformation";
 
 type DataWithTokenFunction = (token: string, url: string) => Promise<any>;

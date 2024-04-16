@@ -23,32 +23,27 @@ interface selectedOptionProductType {
 }
 
 export default function PurchaseToolBar({
-  params,
+  // params,
   selectedOptionProductId,
+  // getOptionList,
   // selectedOptionProductData,
   getOptionList,
   productOptionData,
 }: {
   params: { productId: number };
   selectedOptionProductId: number;
+  // getOptionList: (optionForm: FormData) => void;
   // selectedOptionProductData: selectedOptionProductType[];
-  getOptionList: (optionForm: FormData) => void;
-  productOptionData: { Color: boolean, Size: boolean, AddOption: boolean };
+  // productOptionData:
 }) {
 
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [completeProduct, setCompleteProduct] = useState<selectedOptionProductType | null>(null);
-  const productId = params.productId;
-  const [productCnt, setProductCnt] = useState(0);
   const handleOpenModal = () => {
     setOpenModal(true);
   };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  }
-
+  
   useEffect(() => {
     const completeProduct = async () => {
       const productId: selectedOptionProductType = await getCompleteProductId(selectedOptionProductId) as selectedOptionProductType;

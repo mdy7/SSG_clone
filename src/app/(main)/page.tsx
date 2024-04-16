@@ -6,7 +6,7 @@ import { options } from "../api/auth/[...nextauth]/options";
 import MainEventSection from "@/components/pages/main/MainEventSection";
 import MainShortcutSection from "@/components/pages/main/MainShortcutSection";
 import ProductListTitle from "@/components/layouts/ProductListTitle";
-import LCategoryProductList from "@/components/layouts/lCategorySlideButton";
+import LCategoryProductList from "@/components/layouts/LCategoryProductList";
 import InfinityProductList from "@/components/infinityProduct/InfinityProductList";
 
 export default async function Home() {
@@ -22,7 +22,6 @@ export default async function Home() {
       <section>
         <ProductListTitle />
         <LCategoryProductList />
-        <InfinityProductList />
       </section>
     </main>
   );

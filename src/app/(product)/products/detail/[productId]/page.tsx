@@ -4,11 +4,9 @@ import ProductDetailTop from '@/components/pages/productDetail/ProductDetailTop'
 import ProductDetailContent from '@/components/pages/productDetail/ProductDetailContent';
 import ProductDetailBottom from '@/components/pages/productDetail/ProductDetailBottom';
 import PurchaseToolBar from '@/components/ui/PurchaseToolBar';
-import { productOptionsAvailableType } from '@/types/productOptionAvailableType';
 import getProductOptionsAvailable from '@/app/api/product/getProductOptionsAvailable';
-// import getProductOptionsAvailable from '@/app/api/product/getProductOptionsAvailable';
-// import { productOptionsAvailableType } from '@/types/productOptionAvailableType';
-// import getSelectedOptionProduct from '@/app/api/product/getSelectedOptionProduct';
+import { productOptionsAvailableType } from '@/types/productOptionAvailableType';
+import getSelectedOptionProduct from '@/app/api/product/getSelectedOptionProduct';
 
 interface selectedOptionType {
   colorId?: string,
@@ -37,7 +35,8 @@ export default async function ProductDetailPage({
   params: { productId: number };
 }) {
   const productOptiondata: productOptionsAvailableType =
-    await getProductOptionsAvailable(params.productId) as productOptionsAvailableType;
+    await getProductOptionsAvailable(String(params.productId)) as productOptionsAvailableType;
+
 
   async function getOptionList(optionForm: FormData) {
     'use server';
@@ -60,7 +59,7 @@ export default async function ProductDetailPage({
   // const randomIndex = Math.floor(Math.random() * productList.length);
   // const randomItem = productList[randomIndex];
   // const itemId = randomItem.optionSelectedProductId;
-
+console.log(productOptiondata)
   return (
     <>
       <ProductDetailTop params={params} />
@@ -69,8 +68,8 @@ export default async function ProductDetailPage({
       <PurchaseToolBar
         params={params}
         selectedOptionProductId={0}
-        getOptionList={getOptionList}
-        productOptionData={productOptiondata}
+        // getOptionList={getOptionList}
+        // productOptionData={productOptiondata}
       />
     </>
   );

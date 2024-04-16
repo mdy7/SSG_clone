@@ -5,12 +5,12 @@ import { productDataType } from '@/types/productDataType';
 import HeartIcon from '../../images/svgs/HeartIcon';
 
 export default function Product({
-  id,
-  src,
-  brand,
-  name,
-  subtitle,
-  price
+  // id,
+  // src,
+  // brand,
+  // name,
+  // subtitle,
+  // price
 }: productDataType
 ) {
   
@@ -38,8 +38,8 @@ export default function Product({
         <div className=' flex justify-between items-center pt-[0.125rem]'>
           {/* --------브랜드, 이름-------- */}
           <p className='text-ellipsis line-clamp-2 text-sm'>
-            <span className='font-bold mr-1'>{brand}</span>
-            {name}
+            {/* <span className='font-bold mr-1'>{brand}</span> */}
+            {/* {name} */}
           </p>
           {/* --------브랜드, 이름-------- */}
           <div className='flex justify-center'>
@@ -53,10 +53,10 @@ export default function Product({
             </button>
           </div>
         </div>
-        <p className='text-ellipsis line-clamp-2 text-sm'>
+        {/* <p className='text-ellipsis line-clamp-2 text-sm'>
           {subtitle}
         </p>
-        <span className='font-bold'>{price}원~</span>
+        <span className='font-bold'>{price}원~</span> */}
         {/* --------좋아요/장바구니-------- */}
         <a className='block mt-[0.625rem] pr-[1.25rem]'>
         </a>
