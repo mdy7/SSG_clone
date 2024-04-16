@@ -9,34 +9,36 @@ import Image from 'next/image';
 
 type DataWithTokenFunction = (token: string, url: string) => Promise<any>;
 
-const getDataWithToken: DataWithTokenFunction = async (token: string, url: string) => {
-  try {
-    const res = await fetch(
-      `${process.env.API_BASE_URL}${url}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
+const getDataWithToken: DataWithTokenFunction = (token: string, url: string) => {
+  return fetch(
+    `${process.env.API_BASE_URL}${url}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
-    )
-    if (res.ok) {
-      const data = await res.json()
-      // console.log("data:", data)
-      return data.data
-    }
-  } catch (error) {
-    console.log("error:", error)
-  }
+    },
+  )
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error('Response not OK');
+      }
+    })
+    .then(data => data.data)
+    .catch(error => {
+      console.log("error:", error)
+    })
 }
 
 function SelectAddressModal({
-   handleClose, setDelivery 
-  }: { 
-    handleClose: () => void;
-    setDelivery: React.Dispatch<React.SetStateAction<DeliveryType | null>>;
-   }) {
+  handleClose, setDelivery
+}: {
+  handleClose: () => void;
+  setDelivery: React.Dispatch<React.SetStateAction<DeliveryType | null>>;
+}) {
   const [DeliveryList, setDeliveryList] = useState<DeliveryListType | null>(null);
   const session = useSession();
   const token = session?.data?.user?.accessToken;
@@ -57,7 +59,7 @@ function SelectAddressModal({
 
         if (response.ok) {
           // API 호출 성공 시 처리할 로직 작성
-          console.log('API 호출 성공');
+          // console.log('API 호출 성공');
           handleClose();
         } else {
           console.error('API 호출 실패');
@@ -71,21 +73,14 @@ function SelectAddressModal({
   };
 
   useEffect(() => {
-    const fetchData = async (token: string) => {
-      try {
-        if (token) {
-          const data: DeliveryListType = await getDataWithToken(token, '/delivery-address');
-          setDeliveryList(data);
-        } else {
-          console.error('No access token found');
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     if (token) {
-      fetchData(token);
+      getDataWithToken(token, '/delivery-address')
+        .then(data => {
+          setDeliveryList(data);
+        })
+        .catch(error => {
+          console.error('Error fetching delivery addresses:', error);
+        });
     }
   }, []);
 
@@ -128,9 +123,10 @@ function SelectAddressModal({
                         type="radio"
                         name="deliveryAddress"
                         value={delivery.deliveryAddressId}
-                        onChange={() =>
-                          {setSelectedDeliveryAddressId(delivery.deliveryAddressId);
-                          setDelivery(delivery);}
+                        onChange={() => {
+                          setSelectedDeliveryAddressId(delivery.deliveryAddressId);
+                          setDelivery(delivery);
+                        }
                         }
                         className="block relative w-5 h-5" />
                     </div>

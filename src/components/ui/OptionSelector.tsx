@@ -29,7 +29,7 @@ export default function OptionSelector({
   };
 
   useEffect(() => {
-    console.log('OptionSelector', optionNameList);
+    // console.log('OptionSelector', optionNameList);
   }, [optionNameList]);
 
   return (

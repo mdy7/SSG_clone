@@ -19,7 +19,7 @@ const Getfetch = async (token: string, url: string) => {
   }
 
 const Postfetch = async (token: string, url: string, body: object) => {
-    console.log(body)
+    // console.log(body)
     try {
       const res = await fetch(
         `${process.env.API_BASE_URL}${url}`, //여러개 삭제 api 만들어달라하기
@@ -36,7 +36,7 @@ const Postfetch = async (token: string, url: string, body: object) => {
       )
       if (res.ok) {
         const data = await res.json()
-        console.log("data:", data)
+        // console.log("data:", data)
         return data
       }
     } catch (error) {

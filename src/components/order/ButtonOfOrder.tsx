@@ -12,7 +12,7 @@ interface ButtonOfOrderProps {
   deliveryData: DeliveryType;
   discountedPrices: number[];
 }
-
+ 
 export default function ButtonOfOrder({
   amount,
   token,

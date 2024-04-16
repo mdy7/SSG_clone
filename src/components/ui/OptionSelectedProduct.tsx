@@ -1,24 +1,38 @@
 'use client'
 
+import { productDataType } from '@/types/productDataType';
+import { productType } from '@/types/productType';
 import React, { useState } from 'react';
 
-export default function OptionSelectedProduct() {
+export default function OptionSelectedProduct({ productData, setTotalPrice, setProductCnt2 }: { productData: productType, setTotalPrice: any, setProductCnt2: any }) {
 
-  const [productCnt, setProductCnt] = useState(1);
+  const [productCnt, setProductCnt] = useState(0);
+
+  const calculatedPrice = Math.round((productData.price - (productData.price * (productData.discount / 100))));
 
   const handlePlus = () => {
-    setProductCnt(productCnt + 1);
+    setProductCnt(prevCnt => {
+      const newCnt = prevCnt + 1;
+      setTotalPrice(calculatedPrice * newCnt);
+      setProductCnt2(newCnt);
+      return newCnt;
+    });
   };
 
   const handleMinus = () => {
     if (productCnt > 1) {
-      setProductCnt(productCnt - 1);
+      setProductCnt(prevCnt => {
+        const newCnt = prevCnt - 1;
+        setTotalPrice(calculatedPrice * newCnt);
+        setProductCnt2(newCnt);
+        return newCnt;
+      });
     }
   }
 
   return (
     <div className='mx-4 px-3 pt-2 pb-4 mb-2 bg-[#f8f8f8] h-auto rounded-lg border-black border'>
-      <span className='text-xs'>r</span>
+      <span className='text-xs'>{productData.name}</span>
       <div className='flex justify-between pt-1'>
         <div className='flex bg-white'>
           <span
@@ -32,7 +46,7 @@ export default function OptionSelectedProduct() {
         <div
           className='font-bold'>
           <span>
-            {10000 * productCnt}
+            {(calculatedPrice * productCnt).toLocaleString()}
           </span>
           <span>원</span>
         </div>

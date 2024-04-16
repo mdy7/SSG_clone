@@ -45,7 +45,7 @@ export default function Clip({productId}: {productId: number;}) {
   const handleHeartIconClick = (productId: number, accessToken: string) => {
     const usertoken = accessToken;
     // console.log("usertoken:", usertoken);
-    if (!session) {
+    if (!token) {
       router.push("/memberlogin");
       return true;
     }

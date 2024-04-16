@@ -2,32 +2,35 @@
 import { useEffect, useState } from "react";
 import SelectAddressModal from "../modal/SelectAddressModal";
 import { DeliveryType } from "@/types/delivery/DeliveryListType";
+import { set } from "react-hook-form";
 
 type DataWithTokenFunction = (token: string, url: string) => Promise<any>;
 
-const getDataWithToken: DataWithTokenFunction = async (token: string, url: string) => {
-    try {
-        const res = await fetch(
-            `${process.env.API_BASE_URL}${url}`,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + token,
-                },
+const getDataWithToken: DataWithTokenFunction = (token: string, url: string) => {
+    return fetch(
+        `${process.env.API_BASE_URL}${url}`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
             },
-        )
-        if (res.ok) {
-            const data = await res.json()
-            console.log("data:", data)
-            return data.data
-        }
-    } catch (error) {
-        console.log("error:", error)
-    }
+        },
+    )
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error('Response not OK');
+            }
+        })
+        .then(data => data.data)
+        .catch(error => {
+            console.log("error:", error);
+        });
 }
 
-export default function DeliveryAddress({ token }: { token: string }) {
+export default function DeliveryAddress({ token, setDeliveryData }: { token: string, setDeliveryData: any}) {
     const [SelectAddressModalOpen, setSelectAddressModalOpen] = useState(false);
     const [Delivery, setDelivery] = useState<DeliveryType | null>(null);
 
@@ -43,8 +46,10 @@ export default function DeliveryAddress({ token }: { token: string }) {
         const fetchData = async (token: string) => {
             try {
                 if (token) {
+                    'use server'
                     const data: DeliveryType = await getDataWithToken(token, '/delivery-address/default');
                     setDelivery(data);
+                    setDeliveryData(data);
                 } else {
                     console.error('No access token found');
                 }
@@ -56,7 +61,11 @@ export default function DeliveryAddress({ token }: { token: string }) {
         if (token) {
             fetchData(token);
         }
-    }, []);
+    }, [token]);
+
+    useEffect(() => {
+        setDeliveryData(Delivery);
+    }, [Delivery]);
 
     if (!Delivery) {
         return <div>Loading...</div>;
@@ -75,7 +84,7 @@ export default function DeliveryAddress({ token }: { token: string }) {
                         }>
                         변경
                     </button>
-                    {SelectAddressModalOpen && <SelectAddressModal handleClose={handleClose} setDelivery={setDelivery}/>}
+                    {SelectAddressModalOpen && <SelectAddressModal handleClose={handleClose} setDelivery={setDelivery} />}
                 </div>
                 <div className="my-4 text-sm">
                     {`[${Delivery.post}] ${Delivery.street}`}

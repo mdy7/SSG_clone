@@ -37,6 +37,7 @@ export default async function ProductDetailPage({
   const productOptiondata: productOptionsAvailableType =
     await getProductOptionsAvailable(String(params.productId)) as productOptionsAvailableType;
 
+
   async function getOptionList(optionForm: FormData) {
     'use server';
     const optionData: selectedOptionType = {};
@@ -65,7 +66,7 @@ console.log(productOptiondata)
       <ProductDetailContent params={params} />
       <ProductDetailBottom />
       <PurchaseToolBar
-        // params={params}
+        params={params}
         selectedOptionProductId={0}
         // getOptionList={getOptionList}
         // productOptionData={productOptiondata}

@@ -1,6 +1,6 @@
 import { commonResType } from '@/types/commonResType';
 
-const getOptionData = async (productId: string, optionType: string) => {
+const getOptionData = async (productId: number, optionType: string) => {
   try {
     'use server'
     const response = await fetch(

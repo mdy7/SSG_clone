@@ -40,14 +40,10 @@ export const options: NextAuthOptions = {
 
         if (res.ok) {
           const data = await res.json()
-          console.log(data)
-          // if(data.error.code === 'FAILED_TO_LOGIN') {
-          //   console.log('로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.');
-          //   throw new Error('로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.');
-          // }
+          // console.log(data)
           // get header
           const headerValue = res.headers.get('authorization');
-          console.log("일반로그인성공")
+          // console.log("일반로그인성공")
           // console.log("headervalue:", headerValue);
           // console.log(user)
           const user = {
@@ -73,7 +69,7 @@ export const options: NextAuthOptions = {
       const userInformation:User | AdapterUser = user;
       if (userInformation && profile) {
         // console.log("로그인 성공")
-        console.log("user:", userInformation)
+        // console.log("user:", userInformation)
         // console.log(profile)
         // 회원인지 아닌지 확인
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/sns-login`, {
@@ -90,7 +86,7 @@ export const options: NextAuthOptions = {
           })
         })
         const getData:Data = await res.json();
-        console.log("getData:", getData)
+        // console.log("getData:", getData)
         if (!getData.success)
           return `/join/formsocial?email=${userInformation.email}&snsId=${userInformation.id}&snsType=${account?.provider}`;
           // 회원이 아니면 회원가입 페이지로 이동

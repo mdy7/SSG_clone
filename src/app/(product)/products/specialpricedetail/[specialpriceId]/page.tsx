@@ -35,7 +35,7 @@ const getData: DataFunction = async (url: string) => {
 export default async function SpecialPriceDetailPage({ params }: { params: { specialpriceId: number } }) {
   // console.log("url:", (params.specialpriceId));
   const SpecialPriceData: SpecailPriceDetailType = await getData(`/special/${params.specialpriceId}/product-list`) as SpecailPriceDetailType;
-  console.log("SpecialPriceData:", SpecialPriceData);
+  // console.log("SpecialPriceData:", SpecialPriceData);
   return (
     <div>
       <ProductDetailNavToolBar
@@ -71,7 +71,7 @@ export default async function SpecialPriceDetailPage({ params }: { params: { spe
         reviewRate={4.9}
         reviewCnt={0} />
       <ProductDetailBottom />
-      <PurchaseToolBar selectedOptionProductId={SpecialPriceData.specialPriceProductList[0].productId} />
+      {/* <PurchaseToolBar selectedOptionProductId={SpecialPriceData.specialPriceProductList[0].productId} /> */}
       <div className='px-4'>
         <div className='pt-6 pb-3 text-[13px] font-sans text-zinc-400'>상품번호:10101010</div>
         {SpecialPriceData.specialPriceProductList.map((item, index) => (

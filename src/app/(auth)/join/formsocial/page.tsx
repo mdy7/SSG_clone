@@ -173,7 +173,9 @@ function JoinSocailPage() {
           <Link
             href={'/memberlogin'}
             passHref>
-            <RedButton title='확인' />
+            <button type='submit' className="w-full h-[50px] bg-rose-500 flex justify-center items-center">
+              <div className="text-white text-base font-medium font-sans-serif">확인</div>
+            </button>
           </Link>
         </div>
       </form>

@@ -1,6 +1,6 @@
 import { commonResType } from "@/types/commonResType";
 
-const getProductOptionsAvailable = async (productId: string) => {
+const getProductOptionsAvailable = async (productId: number) => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/product/${productId}/option-types`, { cache: 'no-cache' });
     if (!response.ok) {
