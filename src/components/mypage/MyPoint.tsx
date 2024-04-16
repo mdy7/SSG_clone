@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 function MyPoint() {
     return (
         <section className="mt-3 px-4">
@@ -6,8 +8,9 @@ function MyPoint() {
                     <p className="text-lg mb-1">쿠폰</p>
                     <p className="text-lg">0장</p>
                     <div className="flex justify-center">
-                        <p className="mt-3 py-0.5 w-20 h-7 bg-black rounded font-bold text-white  text-center">
+                        <p className="mt-3 py-0.5 w-20 h-7 bg-black rounded font-bold text-white  text-center"><Link href="/ready">
                             쿠폰함
+                        </Link>
                         </p>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import SmallArrowIcon from '@/images/svgs/SmallArrowIcon';
 import CartIcon from '@/images/svgs/CartIcon';
+import Link from 'next/link';
 
 export default function SearchModal({ onClose }: { onClose: () => void }) {
 
@@ -32,17 +33,21 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
             className='min-w-0 relative ps-4 pe-10 pl-4 bg-gray-100 w-full h-10  pr-11 rounded-3xl text-sm'
             onChange={handleSearch}
             value={searchValue} />
-          <div
-            className='"pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M7.60004 14.8C7.60004 18.76 10.84 22 14.8 22C18.76 22 22 18.76 22 14.8C22 10.84 18.76 7.60001 14.8 7.60001C10.84 7.60001 7.60004 10.84 7.60004 14.8ZM8.80007 14.8C8.80007 11.44 11.4401 8.80001 14.8001 8.80001C18.1601 8.80001 20.8001 11.44 20.8001 14.8C20.8001 18.16 18.1601 20.8 14.8001 20.8C11.4401 20.8 8.80007 18.16 8.80007 14.8Z" fill="black" />
-              <path d="M19.0187 19.8562L19.8672 19.0077L25.3826 24.5231L24.5341 25.3716L19.0187 19.8562Z" fill="black" />
-            </svg>
-          </div>
+          <Link href='/ready'>
+            <div
+              className='"pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M7.60004 14.8C7.60004 18.76 10.84 22 14.8 22C18.76 22 22 18.76 22 14.8C22 10.84 18.76 7.60001 14.8 7.60001C10.84 7.60001 7.60004 10.84 7.60004 14.8ZM8.80007 14.8C8.80007 11.44 11.4401 8.80001 14.8001 8.80001C18.1601 8.80001 20.8001 11.44 20.8001 14.8C20.8001 18.16 18.1601 20.8 14.8001 20.8C11.4401 20.8 8.80007 18.16 8.80007 14.8Z" fill="black" />
+                <path d="M19.0187 19.8562L19.8672 19.0077L25.3826 24.5231L24.5341 25.3716L19.0187 19.8562Z" fill="black" />
+              </svg>
+            </div>
+          </Link>
         </form>
-        <div className='mx-1'>
-          <CartIcon />
-        </div>
+        <Link href='/ready'>
+          <div className='mx-1'>
+            <CartIcon />
+          </div>
+        </Link>
       </div>
       <div>
         <div className='ms-4 me-4'>
