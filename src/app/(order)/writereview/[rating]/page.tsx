@@ -1,7 +1,7 @@
-import ReviewForm from '@/components/layouts/ReviewForm'
-import SimpleHeader from '@/components/layouts/SimpleHeader'
-import ReviewProduct from '@/components/ui/Review/ReviewProduct'
-import React from 'react'
+import React from 'react';
+
+import ReviewForm from '@/components/layouts/ReviewForm';
+import ReviewProduct from '@/components/ui/Review/ReviewProduct';
 
 export default function page() {
     return (

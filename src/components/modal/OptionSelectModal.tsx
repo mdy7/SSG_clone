@@ -97,7 +97,7 @@ export default function OptionSelectModal({
     }
     const optionName = selectedOption.name;
     const getData = async (productId: string, optionType: string) => {
-      const res: any = await getColorOptionList(productId, optionType);
+      const res: any = await getColorOptionList(Number(productId), optionType);
       setOptionListData(res);
       // console.log(res);
     };
@@ -136,7 +136,7 @@ export default function OptionSelectModal({
             <OptionSelectedProduct
               name={selectedOption}
               value={setTotalPrice} />} */}
-        <ProductDetailTotalPrice />
+        <ProductDetailTotalPrice totalPrice={0}/>
         {openSelected && (
           <OptionList
             productId={productId}

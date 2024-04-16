@@ -6,27 +6,11 @@ import ProductDetailBottom from '@/components/pages/productDetail/ProductDetailB
 import PurchaseToolBar from '@/components/ui/PurchaseToolBar';
 import getProductOptionsAvailable from '@/app/api/product/getProductOptionsAvailable';
 import { productOptionsAvailableType } from '@/types/productOptionAvailableType';
-import getSelectedOptionProduct from '@/app/api/product/getSelectedOptionProduct';
 
 interface selectedOptionType {
   colorId?: string,
   sizeId?: string,
   addOptionId?: string,
-}
-
-interface selectedOptionProductType {
-  optionSelectedProductId: number,
-  productId: number,
-  productName: string,
-  productPrice: number,
-  productDiscount: number,
-  colorOptionId: number,
-  color: string,
-  sizeOptionId: number,
-  size: string,
-  addOptionId: number,
-  addOption: string,
-  stock: number
 }
 
 export default async function ProductDetailPage({
@@ -35,7 +19,7 @@ export default async function ProductDetailPage({
   params: { productId: number };
 }) {
   const productOptiondata: productOptionsAvailableType =
-    await getProductOptionsAvailable(String(params.productId)) as productOptionsAvailableType;
+    await getProductOptionsAvailable(params.productId) as productOptionsAvailableType;
 
 
   async function getOptionList(optionForm: FormData) {
@@ -51,15 +35,8 @@ export default async function ProductDetailPage({
     if (productOptiondata.AddOption) {
       optionData.addOptionId = optionForm.get('addOption')?.toString() ?? '';
     }
-    console.log("선택한 옵션: ", optionData);
   }
 
-  // const productList: selectedOptionProductType[] = await getSelectedOptionProduct(Number(params.productId)) as selectedOptionProductType[];
-
-  // const randomIndex = Math.floor(Math.random() * productList.length);
-  // const randomItem = productList[randomIndex];
-  // const itemId = randomItem.optionSelectedProductId;
-console.log(productOptiondata)
   return (
     <>
       <ProductDetailTop params={params} />
@@ -68,8 +45,8 @@ console.log(productOptiondata)
       <PurchaseToolBar
         params={params}
         selectedOptionProductId={0}
-        // getOptionList={getOptionList}
-        // productOptionData={productOptiondata}
+        getOptionList={getOptionList}
+        productOptionData={productOptiondata}
       />
     </>
   );

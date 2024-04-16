@@ -1,8 +1,7 @@
 'use client'
-import Policies from '@/app/(auth)/policies/page';
-import Link from 'next/link';
+
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { Suspense, useState } from 'react';
+import React, { useState } from 'react';
 
 function JoinPage() {
   const router = useRouter();
@@ -38,8 +37,6 @@ function JoinPage() {
       phoneNumber: fullPhoneNumber,
     };
 
-    // console.log(userData);
-
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/join`, {
       method: 'POST',
       headers: {
@@ -53,7 +50,6 @@ function JoinPage() {
     }
 
     const data = await response.json();
-    // console.log(data);
     if(data.success){
       router.push('/memberlogin');
     }

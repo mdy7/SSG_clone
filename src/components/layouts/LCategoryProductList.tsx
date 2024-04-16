@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect, LegacyRef } from 'react';
 
 import { largeCategoryType } from '@/types/largeCategoryType';
 import InfinityProductList from '../infinityProduct/InfinityProductList';
-import { set } from 'react-hook-form';
 
 export default function LCategoryProductList() {
 
@@ -12,8 +11,6 @@ export default function LCategoryProductList() {
   const [categories, setCategories] = useState<largeCategoryType[]>([]);
   const [isSelected, setIsSelected] = useState('');
   const [ctgId, setCtgId] = useState(1);
-
-  // const [isOpenCategory, setIsOpenCategory] = useState(false);
 
   useEffect(() => {
     const getLCategoryData = async () => {
@@ -37,7 +34,7 @@ export default function LCategoryProductList() {
 
   useEffect(() => {
     buttonRefs.current = buttonRefs.current.slice(0, categories.length);
-    if ( buttonRefs.current[0]) {
+    if (buttonRefs.current[0]) {
       buttonRefs.current[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   }, [categories]);
@@ -49,7 +46,7 @@ export default function LCategoryProductList() {
       buttonRefs.current[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   };
-  
+
   return (
     <>
       <div className='col-start-2 col-end-auto ms-[(1rem)*-1] me-[(1rem)*-1] top-[46px] sticky z-[1000] bg-white'>
@@ -62,7 +59,7 @@ export default function LCategoryProductList() {
                     return null;
                   }
                   return (
-                    <li key={index-1}>
+                    <li key={index - 1}>
                       <p
                         ref={buttonRefs.current[category.largeCategoryId] as object as LegacyRef<HTMLParagraphElement>}
                         onClick={() => handleCategoryClick(category.largeCategoryName, category.largeCategoryId)}

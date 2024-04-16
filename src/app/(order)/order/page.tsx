@@ -1,4 +1,8 @@
 'use client'
+import { useSession } from "next-auth/react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+
 import DeliveryAddress from "@/components/order/DeliveryAddress";
 import DeliveryRequest from "@/components/order/DeliveryRequest";
 import TypeOfPayment from "@/components/order/TypeOfPayment";
@@ -10,14 +14,11 @@ import ButtonOfOrder from "@/components/order/ButtonOfOrder";
 import { OrderMemberInfoType } from "@/types/OrderMemberInfo";
 import SimpleHeader from "@/components/layouts/SimpleHeader";
 import { productType } from "@/types/productType";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import { DeliveryType } from "@/types/delivery/DeliveryListType";
-import { useSearchParams } from "next/navigation";
 
 type DataWithTokenFunction = (token: string, url: string) => Promise<any>;
 
-const getDataWithToken: DataWithTokenFunction = (token: string, url: string) => {
+const getDataWithToken: DataWithTokenFunction = async (token: string, url: string) => {
   return fetch(
     `${process.env.API_BASE_URL}${url}`,
     {
@@ -42,7 +43,7 @@ const getDataWithToken: DataWithTokenFunction = (token: string, url: string) => 
 }
 
 const fetchItems = (items: number[]) => {
-  return Promise.all(items.map((item) => {
+  return Promise.all(items.map(async (item) => {
     return fetch(`${process.env.API_BASE_URL}/product/${item}`, {
       method: 'GET',
       headers: {
@@ -76,8 +77,8 @@ export default function OrderPage() {
   const [discountprice, setDiscountPrice] = useState(0);
   const [discountedPrices, setDiscountedPrices] = useState<number[]>([]);
 
-  const items:number[] = [Number(params.get('productId'))]; // 이 배열은 실제 데이터에 따라 변경해야 합니다.
-  const quantity:number[] = [Number(params.get('cnt'))];
+  const items: number[] = [Number(params.get('productId'))];
+  const quantity: number[] = [Number(params.get('cnt'))];
 
   useEffect(() => {
     if (token) {
@@ -91,7 +92,6 @@ export default function OrderPage() {
           const productDataWithQuantity = data.map((cur, index) => {
             return { ...cur, quantity: quantity[index] };
           });
-
           const totalprice = productDataWithQuantity.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
           const discountprice = productDataWithQuantity.reduce((acc, cur) => acc + (cur.price * (cur.discount / 100)) * cur.quantity, 0);
           const discountedPrices = productDataWithQuantity.map(product => (product.price * (1 - product.discount / 100)) * product.quantity);
@@ -107,7 +107,6 @@ export default function OrderPage() {
         .catch(error => {
           console.error('Error fetching data:', error);
         });
-
     }
   }, [token]);
 
@@ -126,9 +125,11 @@ export default function OrderPage() {
             <div className="flex justify-between pt-[15px] px-[16px]">
               <span className="text-lg font-semibold">택배배송</span>
             </div>
-            {productData.map((product, index) => (
-              <DeliveryItemList key={index} productId={product.id} productname={product.name} productprice={product.price} productdiscount={product.discount} quantity={quantity[index]} />
-            ))}
+            <Suspense>
+              {productData.map((product, index) => (
+                <DeliveryItemList key={index} productId={product.id} productname={product.name} productprice={product.price} productdiscount={product.discount} quantity={quantity[index]} />
+              ))}
+            </Suspense>
           </div>
           <ButtonOfOrder amount={totalprice - discountprice} token={token} memberInfo={memberInfo as OrderMemberInfoType} discountedPrices={discountedPrices} deliveryData={deliveryData as DeliveryType} />
         </div>

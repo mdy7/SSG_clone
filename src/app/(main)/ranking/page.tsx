@@ -1,11 +1,8 @@
 'use client'
+
 import React from 'react';
 
-import LargeCategorySlideButton from '@/components/layouts/LCategoryProductList';
-import SpecailPrice from '@/components/widgets/SpecailPrice';
 import TabList from '@/components/widgets/TabList';
-import ProductList from '@/components/layouts/ProductList';
-import InfinityProductList from '@/components/infinityProduct/InfinityProductList';
 import LCategoryProductList from '@/components/layouts/LCategoryProductList';
 
 export default function page() {

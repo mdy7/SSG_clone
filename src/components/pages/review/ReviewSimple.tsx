@@ -14,9 +14,7 @@ interface reviews {
   createdAt: string;
   memberName: string;
   rate: number;
-
 }
-
 
 export default function ReviewSimple({ productId }: { productId: number }){
   const [reviews, setReviews] = useState<reviews[]>([]);

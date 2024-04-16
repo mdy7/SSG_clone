@@ -26,7 +26,6 @@ const getDataWithToken: DataWithTokenFunction = async (
     });
     if (res.ok) {
       const data = await res.json();
-      // console.log("data:", data);
       return data.data;
     }
   } catch (error) {
@@ -59,7 +58,6 @@ function OrderComplete() {
             `/order/${orderId}/member-order-product/`
           );
           setOrderData(data);
-          // console.log("orderData:", orderData);
         } else {
           console.error("No access token found");
         }
@@ -105,7 +103,6 @@ function OrderComplete() {
                 setToggle(!toggle);
               }}
             >
-              {/* { toggle ? <FontAwesomeIcon icon={faAngleUp}/>  :  <FontAwesomeIcon icon={faAngleDown} />} */}
             </div>
           </div>
           {toggle ? <DetailsOfPaymoney /> : null}

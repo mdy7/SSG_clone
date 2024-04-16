@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-function SimpleHeader({title, onClick}: any) {
+function SimpleHeader({title, onClick}: {title: string, onClick?: () => void}) {
 
   const router = useRouter();
 

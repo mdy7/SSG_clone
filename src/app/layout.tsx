@@ -6,6 +6,7 @@ import AuthProvider from '@/components/provider/AuthProvider';
 import RecoilProvider from '@/components/provider/RecoilProvider';
 import TopHeader from '@/components/layouts/TopHeader';
 import BottomHeader from '@/components/layouts/BottomHeader';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -38,7 +39,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <RecoilProvider>
           <AuthProvider>
-            {children}
+            <Suspense>
+              {children}
+            </Suspense>
           </AuthProvider>
         </RecoilProvider>
       </body>
