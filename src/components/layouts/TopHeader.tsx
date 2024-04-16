@@ -37,8 +37,8 @@ export default function TopHeader() {
       </div>
       {isSearchModal && <SearchModal onClose={handleCloseSearchModal} />}
       <div className='flex items-center justify-end'>
-        <AlarmIcon />
-        <CartIcon />
+        <Link href={'/ready'}><AlarmIcon /></Link>
+        <Link href={'/ready'}><CartIcon /></Link>
       </div>
     </div>
   )
