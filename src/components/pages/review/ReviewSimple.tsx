@@ -7,7 +7,6 @@ import React, { useEffect, useState } from 'react';
 import FillStarIcon from '@/images/svgs/FillStarIcon';
 import { commonResType } from '@/types/commonResType';
 
-
 interface reviews {
   reviewId: number;
   content: string;
@@ -18,11 +17,9 @@ interface reviews {
 
 export default function ReviewSimple({ productId }: { productId: number }){
   const [reviews, setReviews] = useState<reviews[]>([]);
-  const [reviewDetail, setReviewDetail] = useState<reviews>();
 
 
   async function fetchReviewData(){
-    console.log(productId)
 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/review/product/${productId}`, { cache: 'no-cache' });
@@ -37,8 +34,6 @@ export default function ReviewSimple({ productId }: { productId: number }){
       console.error('Error:', error);
     }
   }
-
-  console.log(reviews)
 
 const [reviewArr, setReviewArr] = useState<reviews[]>([]);
 

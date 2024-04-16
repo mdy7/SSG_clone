@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
 export default function Footer() {
-  const { data:session } = useSession();
+  const { data: session } = useSession();
   // console.log("session:",session);
 
   return (
@@ -16,21 +16,26 @@ export default function Footer() {
             <p className='flex justify-center gap-2'>
               <span className='block w-[29px] h-[27px] bg-[url("https://sui.ssgcdn.com/ui/m_ssg/img/v2/sp_footer.png")] bg-no-repeat bg-[length:50px_auto] bg-[position:0px_0px]]'></span>
               <span>
-              <span>
-                SSG.COM 고객센터 / 전자금융거래 분쟁처리
-              </span>
-              <br />
-              <span>1577-3419 /</span>
-              <span>ssg@ssg.com</span>
+                <span>
+                  SSG.COM 고객센터 / 전자금융거래 분쟁처리
+                </span>
+                <br />
+                <span>1577-3419 /</span>
+                <span>ssg@ssg.com</span>
               </span>
             </p>
           </div>
           <div className="flex justify-center p-1 flex-wrap font-sans">
             <div className="w-[58.38px] h-[22px] bg-neutral-500 rounded-[3px] border border-zinc-600 flex justify-center items-center text-center text-white text-[10px]" >
-              <a>전화걸기</a>
+              <button
+                onClick={() => alert('게시된 번호로 직접 걸어주세요.')}>
+                전화걸기
+              </button>
             </div>
             <div className="w-[71.99px] h-[22px] bg-neutral-500 rounded-[3px] border border-zinc-600 flex justify-center items-center text-white text-[10px]">
-              <a>1:1 고객센터</a>
+              <button
+                onClick={() => alert('고객센터가 존재하지 않습니다.')}
+              >1:1 고객센터</button>
             </div>
           </div>
         </div>
@@ -50,8 +55,8 @@ export default function Footer() {
           </li>
           <span className='pl-1 mr-1'>|</span>
           <li>{session ? <span onClick={() => signOut()}
-              className='ml-3 mr-3 py-2 cursor-pointer'>
-              로그아웃</span> :
+            className='ml-3 mr-3 py-2 cursor-pointer'>
+            로그아웃</span> :
             <Link
               href={'/join'}
               className='ml-3 mr-3 py-2'>
@@ -60,19 +65,19 @@ export default function Footer() {
           </li>
           <span className='pl-1 mr-1'>|</span>
           <li>
-            <Link
-              href={'#'}
-              className='ml-3 mr-3 py-2'>
+            <p
+              onClick={() => alert('직접 스토어에서 다운 받아주세요.')}
+              className='ml-3 mr-3'>
               앱다운로드
-            </Link>
+            </p>
           </li>
           <span className='pl-1 mr-1'>|</span>
           <li>
-            <Link
-              href={'#'}
-              className='ml-3 mr-3 py-2'>
+            <p
+              onClick={() => alert('PC버전 따위 없습니다.')}
+              className='ml-3 mr-3'>
               PC버전
-            </Link>
+            </p>
           </li>
         </ul>
       </div>
@@ -87,11 +92,11 @@ export default function Footer() {
             사업자등록번호: 870-88-01143
             <br />
             통신판매업 신고번호: 제2022-서울강남-03751호
-            <a
-              href='#'
+            <button
+              onClick={() => alert('설마 여기까지 눌러보셨나요?')}
               className='pl-1 underline decoration-1'>
               사업자 정보확인
-            </a>
+            </button>
             <br />
             개인정보보호 책임자: 김우진
             <span className='pl-1 pr-1'>|</span>
@@ -103,11 +108,11 @@ export default function Footer() {
         <div className="my-5 w-[350px] h-[43px] text-neutral-700 text-[10px] font-sans">
           <p className='text-[11px]'>
             우리은행 채무지급보증 안내
-            <a
-              href='#'
+            <button
+              onClick={() => alert('설마 이것도?')}
               className='pl-1 underline decoration-1'>
               서비스가입사실 확인
-            </a>
+            </button>
           </p>
           <p className='w-[350px] h-3.5'>
             당사는 고객님이 현금 결제한 금액에 대해 우리은행과

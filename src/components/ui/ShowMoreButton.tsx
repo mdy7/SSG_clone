@@ -5,7 +5,7 @@ export default function ShowMoreButton({ title, count }: { title: string, count:
   return (
     <div className='h-11 mt-[26px] rounded-md border-[1px] border-gray-300 mx-4'>
       <Link
-        href={'#'}
+        href={'/ready'}
         className='relative inline-block w-full h-full text-sm text-center font-medium leading-10 text-gray-500'
       >
         {title}

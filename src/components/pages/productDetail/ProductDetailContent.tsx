@@ -19,7 +19,7 @@ export default async function ProductDetailContent({ params }: { params: { produ
     <>
       <section id='detail' className='border-t-[15px]'>
         <ProductDetailInfoTitle title={"상세정보"} />
-        <ProductDetailInfoContent // 몇몇 이미지가 늘어나는 문제 해결 필요
+        <ProductDetailInfoContent
           id={productData.id}
           content={productData.content} />
       </section>

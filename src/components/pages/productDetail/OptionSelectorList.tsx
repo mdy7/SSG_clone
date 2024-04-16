@@ -28,7 +28,7 @@ export default function OptionSelectorList({
     return;
     // }
 
-    alert('위 옵션부터 선택해주세요.');
+    // alert('위 옵션부터 선택해주세요.');
   };
 
   return (

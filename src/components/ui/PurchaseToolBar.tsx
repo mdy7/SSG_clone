@@ -38,7 +38,6 @@ export default function PurchaseToolBar({
   productOptionData: { Color: boolean, Size: boolean, AddOption: boolean }
 }) {
 
-  const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [completeProduct, setCompleteProduct] = useState<selectedOptionProductType | null>(null);
   const productId = params.productId;
@@ -59,9 +58,6 @@ export default function PurchaseToolBar({
     }
     completeProduct();
   }, [openModal, selectedOptionProductId]);
-
-  console.log(selectedOptionProductId)
-
 
   return (
     <>
