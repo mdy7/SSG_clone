@@ -1,3 +1,4 @@
+'use client'
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import ClipModal2 from "./ClipModal2";
@@ -30,14 +31,14 @@ export default function FolderModal({ closeModal, likeFolderListData }: any) {
     // Specify the return type as void
     // console.log("token:", token);
     const response = fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/like/folder/${likeFolderId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/like/folder`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ folderId:likeFolderId }),
       }
     );
     closeModal();

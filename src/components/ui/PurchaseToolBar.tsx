@@ -73,7 +73,7 @@ export default function PurchaseToolBar({
                 className="w-full h-[52px] pt-4 flex bg-black justify-center">
                 <Link
                   href={{
-                    pathname: `/cart`,
+                    pathname: `/ready`,
                     query: {
                       productId: productId, 
                       cnt: productCnt
