@@ -4,31 +4,13 @@ import ProductDetailTop from '@/components/pages/productDetail/ProductDetailTop'
 import ProductDetailContent from '@/components/pages/productDetail/ProductDetailContent';
 import ProductDetailBottom from '@/components/pages/productDetail/ProductDetailBottom';
 import PurchaseToolBar from '@/components/ui/PurchaseToolBar';
-import { productOptionsAvailableType } from '@/types/productOptionAvailableType';
 import getProductOptionsAvailable from '@/app/api/product/getProductOptionsAvailable';
-// import getProductOptionsAvailable from '@/app/api/product/getProductOptionsAvailable';
-// import { productOptionsAvailableType } from '@/types/productOptionAvailableType';
-// import getSelectedOptionProduct from '@/app/api/product/getSelectedOptionProduct';
+import { productOptionsAvailableType } from '@/types/productOptionAvailableType';
 
 interface selectedOptionType {
   colorId?: string,
   sizeId?: string,
   addOptionId?: string,
-}
-
-interface selectedOptionProductType {
-  optionSelectedProductId: number,
-  productId: number,
-  productName: string,
-  productPrice: number,
-  productDiscount: number,
-  colorOptionId: number,
-  color: string,
-  sizeOptionId: number,
-  size: string,
-  addOptionId: number,
-  addOption: string,
-  stock: number
 }
 
 export default async function ProductDetailPage({
@@ -38,6 +20,7 @@ export default async function ProductDetailPage({
 }) {
   const productOptiondata: productOptionsAvailableType =
     await getProductOptionsAvailable(params.productId) as productOptionsAvailableType;
+
 
   async function getOptionList(optionForm: FormData) {
     'use server';
@@ -52,14 +35,7 @@ export default async function ProductDetailPage({
     if (productOptiondata.AddOption) {
       optionData.addOptionId = optionForm.get('addOption')?.toString() ?? '';
     }
-    console.log("선택한 옵션: ", optionData);
   }
-
-  // const productList: selectedOptionProductType[] = await getSelectedOptionProduct(Number(params.productId)) as selectedOptionProductType[];
-
-  // const randomIndex = Math.floor(Math.random() * productList.length);
-  // const randomItem = productList[randomIndex];
-  // const itemId = randomItem.optionSelectedProductId;
 
   return (
     <>

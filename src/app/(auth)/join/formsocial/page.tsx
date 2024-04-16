@@ -1,12 +1,10 @@
 'use client'
-import { useRouter, useSearchParams } from 'next/navigation';
-import React, { Suspense, useState } from 'react';
 
-import RedButton from '@/components/ui/Buttons/RedButton';
+import React, { Suspense, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 function JoinSocailPage() {
-  const router = useRouter();
   const email = useSearchParams();
   const snsId = useSearchParams();
   const snsType = useSearchParams();
@@ -37,9 +35,6 @@ function JoinSocailPage() {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
-    const data = await response.json();
-    // console.log(data);
   };
 
   function openPopup(url: string) {

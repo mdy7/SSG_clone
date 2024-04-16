@@ -1,16 +1,15 @@
 "use client"
-import { use, useEffect, useState } from "react"
-import Checkbox from "../ui/Checkbox"
-import ClipCancleButton from "./ClipCancleButton"
-import ClipEditButton from "./ClipEditButton"
-import EditBar from "./EditBar"
-import ClipInfoButton from "./ClipInfoButton"
-import { deleteManyClips } from "@/actions/clip"
-import Link from "next/link"
-import Product from "../ui/Item/Product"
-import Thumnail from "../ui/Item/Thumnail"
-import { useSession } from "next-auth/react"
-import ClipCart from "../ui/Item/ClipCart"
+
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+
+import Checkbox from "../ui/Checkbox";
+import ClipCancleButton from "./ClipCancleButton";
+import EditBar from "./EditBar";
+import ClipInfoButton from "./ClipInfoButton";
+import Product from "../ui/Item/Product";
+import Thumnail from "../ui/Item/Thumnail";
+import ClipCart from "../ui/Item/ClipCart";
 
 //itemIds는 서버에서 받아와야함
 type ClipMainPropsType = {
@@ -23,8 +22,8 @@ type ItemType = {
 };
 
 export default function ClipMain({folderId}: {folderId: number}) {
+
   const session = useSession()
-  // console.log("session:", session)
   const token = session.data?.user.accessToken;
   const [count, setCount] = useState(0)
   const [likeListData, setLikeListData] = useState([]);
@@ -41,13 +40,13 @@ export default function ClipMain({folderId}: {folderId: number}) {
     }).then((res) => res.json())
       .then((data) => {
         setLikeListData(data.data); // likeListData state를 업데이트합니다.
-        // console.log("likeListData:", likeListData);
         const initialClicks = data?.data?.reduce((acc: { [x: string]: boolean }, item: { id: string | number }) => {
           acc[item.id] = false;
           return acc;
         }, {} as { [key: number]: boolean });
         setClicks(initialClicks);
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const [allCheck, setAllCheck] = useState(false)

@@ -1,10 +1,8 @@
 'use client'
-import React, { useState } from 'react';
-import TabListUi from '../ui/TabListUi';
 
-interface TabListProps {
-  TablistTitles: string[];
-}
+import React, { useState } from 'react';
+
+import TabListUi from '../ui/TabListUi';
 
 export default function TabList({TablistTitles}:{ TablistTitles: {title: string, subtitle?:string}[] }) {
   const [expandedTab, setExpandedTab] = useState<number | null>(0);
@@ -21,7 +19,6 @@ export default function TabList({TablistTitles}:{ TablistTitles: {title: string,
               subtitle={item.subtitle}
               titleUrl='/specialprice'
               isExpanded={expandedTab === index}
-              onExpand={() => setExpandedTab(index)}
               />
             ))}
           </ul>

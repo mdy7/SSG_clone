@@ -14,7 +14,6 @@ export default function DeliveryAddress() {
     return (
         <section className="my-5 mx-5 z-[2]">
             <div className="flex mb-2 ">
-                {/* <Image src={LocationIcon} alt="위치" width={20} /> */}
                 <Image
                     width={20}
                     height={20}

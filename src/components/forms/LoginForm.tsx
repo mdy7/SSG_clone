@@ -10,13 +10,14 @@ import SocialLoginButton from "../ui/Buttons/SocialLoginButton";
 export default function LoginForm() {
   const { data: session } = useSession();
   const param = useSearchParams();
+  const router = useRouter();
   // console.log(param.get('callbackUrl'))
   const callbackUrl = param.get('callbackUrl');
   // console.log('session:', session);
   
   if(session) {
     alert('이미 로그인 되어있습니다.')
-    useRouter().push(callbackUrl ? callbackUrl : '/')
+    router.push(callbackUrl ? callbackUrl : '/')
   }
   useEffect(() => {
     // console.log("session:",session)

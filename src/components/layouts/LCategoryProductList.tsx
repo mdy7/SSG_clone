@@ -1,20 +1,21 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, LegacyRef } from 'react';
 
 import { largeCategoryType } from '@/types/largeCategoryType';
 import InfinityProductList from '../infinityProduct/InfinityProductList';
 
 export default function LCategoryProductList() {
 
-  const buttonRefs = useRef<HTMLButtonElement[]>([]);
+  const buttonRefs = useRef<HTMLParagraphElement[]>([]);
   const [categories, setCategories] = useState<largeCategoryType[]>([]);
   const [isSelected, setIsSelected] = useState('');
-  // const [isOpenCategory, setIsOpenCategory] = useState(false);
+  const [ctgId, setCtgId] = useState(1);
 
   useEffect(() => {
     const getLCategoryData = async () => {
       try {
+        'use server'
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/category/large`, { cache: 'no-cache' });
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -28,57 +29,56 @@ export default function LCategoryProductList() {
         console.error('Error:', error);
       }
     };
-
     getLCategoryData();
   }, []);
 
   useEffect(() => {
     buttonRefs.current = buttonRefs.current.slice(0, categories.length);
+    if (buttonRefs.current[0]) {
+      buttonRefs.current[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
   }, [categories]);
 
   const handleCategoryClick = (category: string, index: number) => {
     setIsSelected(category);
-    buttonRefs.current[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    setCtgId(index);
+    if (buttonRefs.current[index] !== undefined) {
+      buttonRefs.current[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
   };
-
 
   return (
     <>
       <div className='col-start-2 col-end-auto ms-[(1rem)*-1] me-[(1rem)*-1] top-[46px] sticky z-[1000] bg-white'>
         <div className='flex-start flex-shrink-0 align-middle relative overflow-x-scroll'>
           <div className='h-[56px] overflow-hidden text-nowrap flex'>
-            <div className='flex-nowrap pt-[10px] pb-[10px] ps-3 pe-1 overflow-scroll'>
+            <ul className='flex flex-nowrap pt-[10px] pb-[10px] ps-3 pe-1 overflow-x-scroll'>
               {
-                categories.map((category) => {
+                categories.map((category, index) => {
                   if (category.largeCategoryName === '') {
-                    return;
+                    return null;
                   }
                   return (
-                    <button
-                      key={category.largeCategoryId}
-                      ref={el => buttonRefs.current[category.largeCategoryId] = el!}
-                      onClick={() => { handleCategoryClick(category.largeCategoryName, category.largeCategoryId) }}
-                      className={`min-w-min h-[36px] text-xs font-semibold border mr-[5px] pl-2 pr-2 
-                    ${isSelected === category.largeCategoryName ? 'bg-black text-white border-black' : 'bg-white text-xs  text-black border-gray-200'}`}>
-                      {category.largeCategoryName}
-                    </button>
+                    <li key={index - 1}>
+                      <p
+                        ref={buttonRefs.current[category.largeCategoryId] as object as LegacyRef<HTMLParagraphElement>}
+                        onClick={() => handleCategoryClick(category.largeCategoryName, category.largeCategoryId)}
+                        className={`min-w-min h-[36px] text-xs font-semibold border mr-[5px] pl-2 pr-2 pt-2 align-middle 
+                        ${isSelected === category.largeCategoryName ? 'bg-black text-white border-black' : 'bg-white text-xs  text-black border-gray-200'}`}>
+                        {category.largeCategoryName}
+                      </p>
+                    </li>
                   )
                 })
               }
-            </div>
-            {/* <div className='bg-white top-[10px] absolute  bottom-[10px] right-0 pr-4'>
-            <button
-              onClick={handleOpenCategoryList}
-              className='min-w-9 min-h-9 rotate-90 inline-flex items-center justify-center text-sm border border-gray-200'>
-              <div className='w-[18px] h-[18px] text-black font-bold'>
-                <SmallArrowIcon />
-              </div>
-              {/* {isOpenCategory && <LargeCategoryList onClose={handleCloseCategoryList} />} */
-            /* </button> *}
-          </div> */}
+            </ul>
           </div>
         </div>
       </div>
+      <InfinityProductList
+        apiType={'large-category-paged'}
+        id={ctgId}
+      />
     </>
   )
 }

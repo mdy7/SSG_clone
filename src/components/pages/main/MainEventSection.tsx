@@ -40,7 +40,7 @@ export default function MainEventSection() {
           pagination={{
             type: "fraction",
           }}
-          modules={[Autoplay, Pagination, Navigation]} // swiper stop으로 검색해서 수정
+          modules={[Autoplay, Pagination, Navigation]}
           onSlideChange={handleSlideChange}>
           {mainEventImageData.map((item, idx) => {
             return (

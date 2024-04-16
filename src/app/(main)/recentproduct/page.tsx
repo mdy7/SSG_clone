@@ -1,4 +1,5 @@
 'use client'
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -35,7 +36,6 @@ export default function Recent() {
         setDeleted(!deleted)
     }
     const checkItemhandler = (id: number, ischecked: boolean) => {
-        // console.log(id, ischecked)
         if (ischecked) {
             setCheckedItem((prev) => [...prev, id])
         } else {
@@ -82,7 +82,6 @@ export default function Recent() {
                         <button className="bg-red-500 h-10 rounded-lg w-full text-white">전체 삭제</button>
                     </div>
                 )}
-
                 {productData.map((product) => (
                     <div key={product.productId}>
                         <div className="flex justify-between bg-white rounded w-full  mt-4">

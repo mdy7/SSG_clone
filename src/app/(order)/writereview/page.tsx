@@ -1,6 +1,6 @@
 'use client'
+
 import React, { useState } from 'react';
-// import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 import SimpleHeader from '@/components/layouts/SimpleHeader';
 import ReviewProduct from '@/components/ui/Review/ReviewProduct';
@@ -17,7 +17,6 @@ export default function Writereview() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
 
   const [rating, setRating] = useState(0);
 

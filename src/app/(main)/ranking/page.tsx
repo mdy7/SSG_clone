@@ -1,11 +1,9 @@
 'use client'
+
 import React from 'react';
 
-import LargeCategorySlideButton from '@/components/layouts/lCategorySlideButton';
-import SpecailPrice from '@/components/widgets/SpecailPrice';
 import TabList from '@/components/widgets/TabList';
-import ProductList from '@/components/layouts/ProductList';
-import InfinityProductList from '@/components/infinityProduct/InfinityProductList';
+import LCategoryProductList from '@/components/layouts/LCategoryProductList';
 
 export default function page() {
 
@@ -19,7 +17,7 @@ export default function page() {
   return (
     <div className="w-full h-100">
       <TabList TablistTitles={TablistTitles} />
-      <InfinityProductList />
+      <LCategoryProductList />
     </div>
   )
 }

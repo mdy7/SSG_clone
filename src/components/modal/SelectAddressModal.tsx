@@ -1,11 +1,11 @@
 'use client'
+
 import Link from 'next/link';
-import AddressList from '../pages/address/AddressList';
-import HeaderToBackInModal from '../ui/Headers/HeaderToBackInModal';
-import { DeliveryListType, DeliveryType } from '@/types/delivery/DeliveryListType';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
+
+import { DeliveryListType, DeliveryType } from '@/types/delivery/DeliveryListType';
 
 type DataWithTokenFunction = (token: string, url: string) => Promise<any>;
 
@@ -59,7 +59,6 @@ function SelectAddressModal({
 
         if (response.ok) {
           // API 호출 성공 시 처리할 로직 작성
-          // console.log('API 호출 성공');
           handleClose();
         } else {
           console.error('API 호출 실패');
@@ -82,6 +81,7 @@ function SelectAddressModal({
           console.error('Error fetching delivery addresses:', error);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!DeliveryList) {

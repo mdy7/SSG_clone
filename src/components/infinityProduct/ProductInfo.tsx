@@ -48,19 +48,19 @@ function ProductInfo({ id }: { id: number }) {
   return (
     <>
       {brandName && productData && (
-        <div className="">
-          <p className="font-bold">{brandName.brandName}</p>{" "}
-          <p className="text-slate-600 text-[0.9rem] line-clamp-2">
+        <div>
+          <p className="font-bold text-xs">{brandName.brandName}</p>{" "}
+          <p className="text-slate-600 text-[0.8rem] line-clamp-2">
             {productData.name}
           </p>
           {productData.discount === 0 ? (
-            <p className="pt-[18.2px] text-[1.3rem] font-bold">{productData.price.toLocaleString()}원</p>
+            <p className="pt-[1.5rem] text-[1.0rem] font-bold">{productData.price.toLocaleString()}원</p>
           ) : (
             <>
-              <p className="text-[0.8rem] text-slate-300 ">
+              <del className="text-[0.8rem] text-slate-300 ">
                 {productData.price.toLocaleString()}원
-              </p>
-              <p className="text-[1.3rem] font-bold">
+              </del>
+              <p className="text-[1.0rem] font-bold">
                 <span className=" text-[#FF5452]">
                   {productData.discount}%{" "}
                 </span>
