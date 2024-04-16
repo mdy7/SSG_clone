@@ -31,7 +31,9 @@ export default function MainShortcutSection() {
           mainShortcutData.map((item: mainShortcutType, idx) => {
             return (
               <ol key={idx} className='py-5 pl-3 pr text-xs text-center'>
-                <div className="w-[64px] h-[102px] flex flex-col items-center">
+                <div
+                  className="w-[64px] h-[102px] flex flex-col items-center"
+                  onClick={() => alert('준비 중인 기능입니다.')}>
                   <div className='mb-1'>
                     <Image
                       className='rounded-full'
@@ -44,7 +46,11 @@ export default function MainShortcutSection() {
                   </div>
                   {lineBreak(item.title1)}
                 </div>
-                <div key={idx} className='w-[64px] h-[128px] pt-2 flex flex-col items-center'>
+                <div 
+                key={idx} 
+                className='w-[64px] h-[128px] pt-2 flex flex-col items-center'
+                onClick={() => alert('준비 중인 기능입니다.')}
+                >
                   <div className='overflow-hiddden mb-2'>
                     <Image
                       className='rounded-full'

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SmallArrowIcon from '@/images/svgs/SmallArrowIcon';
+import Link from 'next/link';
 
 export default function ProductListTitle() {
   return (
@@ -10,14 +11,14 @@ export default function ProductListTitle() {
           className='text-ellipsis font-extrabold text-[20px] overflow-hidden'
         >지금 인기있는 상품이에요</h3>
       </div>
-      <a
-        href="#"
+      <Link
+        href="/category"
         className='inline-flex pt-2 items-start justify-center h-[16px] text-[12px] text-stone-700'>
         전체보기
         <div className='w-[15px] h-[15px]'>
           <SmallArrowIcon />
         </div>
-      </a>
+      </Link>
     </div>
   )
 }

@@ -4,15 +4,11 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import HeartIcon from '@/images/svgs/HeartIcon';
 import LargeArrowIcon from '@/images/svgs/LargeArrowIcon';
 import ShareIcon from '@/images/svgs/ShareIcon';
 import SmallArrowIcon from '@/images/svgs/SmallArrowIcon';
-// import TriangleIcon from '@/images/svgs/TriangleIcon';
-// import CategoryListModal from '@/components/modal/CategoryListModal';
 
 export default function CategoryProductListToolBar() {
-  // const [isOpenModal, setIsOpenModal] = useState(false);
   const [standardCtg, setStandardCtg] = useState<string | null>(null);
   const [subCtg, setSubCtg] = useState<string | null>(null);
 
@@ -42,7 +38,6 @@ export default function CategoryProductListToolBar() {
 
   return (
     <div className="flex flex-row w-full h-[46px] bg-white items-center pl-3 pr-3 sticky top-0 z-10">
-      {/* {isOpenModal && <CategoryListModal />} */}
       <div className="items-center h-full">
         <Link
           href='#'
@@ -81,14 +76,9 @@ export default function CategoryProductListToolBar() {
       </div>
       <div className="flex-grow flex-shrink basis-0 justify-stretch self-stretch"></div>
       <div className="w-8 h-8 flex justify-center items-center flex-grow-0 flex-shrink-0 basis-auto">
-        <button className="flex justify-center items-center">
-          <div className="w-6 h-6 inline-block flex-shrink-0 align-middle">
-            <HeartIcon />
-          </div>
-        </button>
-      </div>
-      <div className="w-8 h-8 flex justify-center items-center flex-grow-0 flex-shrink-0 basis-auto">
-        <button className="flex">
+        <button 
+        className="flex"
+        onClick={() => alert('준비 중인 기능입니다.')}>
           <div className="w-6 h-6 inline-block flex-shrink-0 align-middle">
             <ShareIcon />
           </div>

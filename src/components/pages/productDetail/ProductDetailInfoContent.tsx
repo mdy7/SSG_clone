@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 
 import TriangleIcon from '@/images/svgs/TriangleIcon';
-import parse from 'html-react-parser';
 
 export default function ProductDetailInfoContent({ id, content }: { id: number, content: string }) {
 
@@ -28,7 +27,7 @@ export default function ProductDetailInfoContent({ id, content }: { id: number, 
             문제가 있나요?
           </p>
           <Link
-            href={'#'}
+            href={'/ready'}
             className='inline-block min-w-20 h-10 leading-10 rounded-[20px] border-solid border-[1px] border-[#e5e5e5] text-[11px] font-bold text-center'
           >
             <span>신고하기</span>
@@ -38,7 +37,6 @@ export default function ProductDetailInfoContent({ id, content }: { id: number, 
       <div className='block max-h-none overflow-hidden relative mt-5 border-t-[1px]'>
         <div className='my-0 mx-4 py-5 px-0'>
           <div className={`relative block my-4 mx-0 w-auto h-auto ${isExpanded ? '' : 'max-h-dvh'}`}>
-            {/* <div dangerouslySetInnerHTML={{ __html: content}} /> */}
             <div>
               {parse(content)}
             </div>

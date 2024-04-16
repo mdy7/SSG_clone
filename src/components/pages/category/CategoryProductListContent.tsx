@@ -43,7 +43,12 @@ export default function CategoryProductListContent() {
       <SubCategoryTable />
       <div className="col-start-2 col-end-auto">
         {pathname.includes('all') ?
-          <InfinityProductList apiType={apiType} id={Number(ctgId)} /> : ''}
+          <InfinityProductList apiType={apiType} id={Number(ctgId)} />
+          :
+          <div className='w-full mt-5 bg-white max-h-[800px] h-[200px] flex justify-center items-center flex-col'>
+            <div className='text-9xl text-yellow-500'>⚠</div>
+            <p className='text-xl font-bold'>상품 준비 중</p>
+          </div>}
       </div>
     </>
   )

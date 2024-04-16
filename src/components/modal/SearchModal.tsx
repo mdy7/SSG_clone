@@ -5,6 +5,7 @@ import React from 'react';
 import SmallArrowIcon from '@/images/svgs/SmallArrowIcon';
 import CartIcon from '@/images/svgs/CartIcon';
 import { Viewport } from 'next';
+import Link from 'next/link';
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -16,7 +17,7 @@ export const viewport: Viewport = {
 export default function SearchModal({ onClose }: { onClose: () => void }) {
 
   const handleSearch = (e: React.MouseEvent<HTMLDivElement>) => {
-    alert('사용할 수 없는 기능입니다.');
+    alert('준비 중인 기능입니다.');
     e.preventDefault();
   }
 
@@ -50,7 +51,10 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
           </div>
         </form>
         <div className='mx-1'>
-          <CartIcon />
+          <Link
+            href={'/ready'}>
+            <CartIcon />
+          </Link>
         </div>
       </div>
       <div>

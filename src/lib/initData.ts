@@ -19,25 +19,21 @@ export const mainNavMenuData: navType[] = [
   {
     id: 4,
     title: '명품',
-    // url: '/ssg_luxury'
     url: '/category/all?lCtgId=7&lCtgName=명품'
   },
   {
     id: 5,
     title: '뷰티',
-    // url: '/mondaymoon'
     url: '/category/all?lCtgId=8&lCtgName=뷰티'
   },
   {
     id: 6,
     title: '패션',
-    // url: '/ssgfashion
     url: '/category/all?lCtgId=1&lCtgName=패션의류'
   },
   {
     id: 7,
     title: '브랜드',
-    // url: '/ssgbrand'
-    url: '/'
+    url: '/ready'
   },
 ]

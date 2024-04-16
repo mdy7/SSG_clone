@@ -5,12 +5,10 @@ import React, { useEffect, useState } from 'react';
 import CartIcon from '@/images/svgs/CartIcon';
 import MagnifyingGlassIcon from '@/images/svgs/MagnifyingGlassIcon';
 import GoBack from '@/components/ui/GoBack';
-import SearchModal from '@/components/modal/SearchModal';
 
 export default function ProductDetailNavToolBar({ reviewCnt, qnaCnt }: { reviewCnt: number, qnaCnt: number }) {
 
   const [isScrolled, setIsScrolled] = useState(false);
-  const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [clickedItem, setClickedItem] = useState<string | null>(null);
 
   useEffect(() => {
@@ -21,7 +19,7 @@ export default function ProductDetailNavToolBar({ reviewCnt, qnaCnt }: { reviewC
     };
   }, []);
 
-  const checkScroll = () => { // 수정 필요
+  const checkScroll = () => {
     if (window.scrollY > 0) {
       setIsScrolled(true);
     } else {
@@ -86,10 +84,14 @@ export default function ProductDetailNavToolBar({ reviewCnt, qnaCnt }: { reviewC
           </div>
         </li>
         <li className='flex w-1/6 justify-around'>
-          <div>
+          <div
+            onClick={() => alert('준비 중인 기능입니다.')}
+          >
             <MagnifyingGlassIcon />
           </div>
-          <div>
+          <div
+            onClick={() => alert('준비 중인 기능입니다.')}
+          >
             <CartIcon />
           </div>
         </li>
