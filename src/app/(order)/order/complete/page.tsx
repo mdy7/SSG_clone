@@ -69,7 +69,7 @@ function OrderComplete() {
     if (token) {
       fetchData(token);
     }
-  }, []);
+  }, [orderId, token]);
 
   return (
     <>

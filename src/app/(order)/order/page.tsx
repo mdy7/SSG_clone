@@ -108,7 +108,8 @@ export default function OrderPage() {
           console.error('Error fetching data:', error);
         });
     }
-  }, [token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items]);
 
   return (
     <>

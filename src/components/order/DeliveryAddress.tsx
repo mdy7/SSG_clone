@@ -61,10 +61,12 @@ export default function DeliveryAddress({ token, setDeliveryData }: { token: str
         if (token) {
             fetchData(token);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
     useEffect(() => {
         setDeliveryData(Delivery);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [Delivery]);
 
     if (!Delivery) {

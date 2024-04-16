@@ -41,13 +41,13 @@ export default function ClipMain({folderId}: {folderId: number}) {
     }).then((res) => res.json())
       .then((data) => {
         setLikeListData(data.data); // likeListData state를 업데이트합니다.
-        // console.log("likeListData:", likeListData);
         const initialClicks = data?.reduce((acc: { [x: string]: boolean }, item: { id: string | number }) => {
           acc[item.id] = false;
           return acc;
         }, {} as { [key: number]: boolean });
         setClicks(initialClicks);
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const [allCheck, setAllCheck] = useState(false)

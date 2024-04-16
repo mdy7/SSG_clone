@@ -53,6 +53,7 @@ const [reviewArr, setReviewArr] = useState<reviews[]>([]);
 
   useEffect(() => {
     fetchReviewData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

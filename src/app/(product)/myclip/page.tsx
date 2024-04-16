@@ -53,11 +53,7 @@ export default function ClipPage() {
       .then((res) => res.json())
       .then((data) => {
         // 좋아요 상태 설정
-        // console.log('API response:', data);
-        // console.log("itemId:", data.data?.productId);
-        // console.log("liked:", data.data?.like);
         setLikeFolderListData(data.data);
-        // console.log("likeFolderListData:", likeFolderListData);
       });
   }, [token]);
   

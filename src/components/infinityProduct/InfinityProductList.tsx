@@ -51,6 +51,7 @@ function InfinityProductList({
 
   useEffect(() => {
     getProductIdList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, id]);
 
   useEffect(() => {
