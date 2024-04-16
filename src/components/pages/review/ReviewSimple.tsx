@@ -27,14 +27,13 @@ export default function ReviewSimple({ productId }: { productId: number }){
     console.log(productId)
 
     try {
-      const response = await fetch(`https://nocaffein.shop/api/v1/review/product/${productId}`, { cache: 'no-cache' });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/review/product/${productId}`, { cache: 'no-cache' });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data: commonResType = await response.json() as commonResType;
       const reviews: reviews[] = data.data as reviews[];
       setReviews(reviews);
-      // console.log('data:', data.data[0].reviewId)
       return data.data;
     } catch (error) {
       console.error('Error:', error);
@@ -46,7 +45,7 @@ export default function ReviewSimple({ productId }: { productId: number }){
 const [reviewArr, setReviewArr] = useState<reviews[]>([]);
 
   async function fetchReviewDetail(reviewId: number) {
-    const reviewResponse = await fetch(`https://nocaffein.shop/api/v1/review/${reviewId}`);
+    const reviewResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/review/${reviewId}`);
     const reviewData: commonResType = await reviewResponse.json() as commonResType;
     const reviewDetailData: reviews = reviewData.data as reviews;
     setReviewArr(prevReviewArr => [...prevReviewArr, reviewDetailData]);
@@ -63,67 +62,6 @@ const [reviewArr, setReviewArr] = useState<reviews[]>([]);
       fetchReviewDetail(review.reviewId);
     })}
   }, [reviews])
-  // console.log(reviews)
-  // console.log("revoewArr",reviewArr)
-
-
-  // useEffect(() => {
-  // const fetchReviewData = async () => {
-  //   'use server'
-  //   const response = await fetch('https://nocaffein.shop/api/v1/review/product/1',
-  //     { cache: 'no-cache' }
-  //   );
-  //   if (!response.ok) {
-  //     throw new Error('Network response was not ok');
-
-  //   }),
-  //   )
-  // }
-  // }
-  // )
-
-  // const exampleData = [
-  //   {
-  //     rating: 4,
-  //     type: '일반',
-  //     date: '2022.01.01',
-  //     id: 'user1',
-  //     images: ['image1_url', 'image2_url'],
-  //     content: '옷이 너무 예뻐요!!'
-  //   },
-  //   {
-  //     rating: 5,
-  //     type: '일반',
-  //     date: '2022.01.02',
-  //     id: 'user2',
-  //     images: ['image3_url', 'image4_url'],
-  //     content: '배송이 빨라요!! 잘 입을게요'
-  //   },
-  //   {
-  //     rating: 3,
-  //     type: '일반',
-  //     date: '2022.01.03',
-  //     id: 'user3',
-  //     images: ['image5_url', 'image6_url'],
-  //     content: '좋네요. 무난하게 입을만 한거 같아요.'
-  //   },
-  //   {
-  //     rating: 4,
-  //     type: '일반',
-  //     date: '2022.01.04',
-  //     id: 'user4',
-  //     images: ['image7_url', 'image8_url'],
-  //     content: '너무 마음에 들네요'
-  //   },
-  //   {
-  //     rating: 5,
-  //     type: '일반',
-  //     date: '2022.01.05',
-  //     id: 'user5',
-  //     images: ['image9_url', 'image10_url'],
-  //     content: '굿'
-  //   }
-  // ];
 
   return (
     <>
