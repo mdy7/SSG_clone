@@ -15,6 +15,7 @@ export default function LoginForm() {
   // console.log('session:', session);
   
   if(session) {
+    alert('이미 로그인 되어있습니다.')
     useRouter().push(callbackUrl ? callbackUrl : '/')
   }
   useEffect(() => {
