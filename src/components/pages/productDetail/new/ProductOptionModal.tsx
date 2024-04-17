@@ -24,8 +24,8 @@ interface selectedOptionProductFetchType {
   addOptionId: string;
 };
 
-const getData = (url: string) => {
-  return fetch(
+const getData = async (url: string) => {
+  const res = await fetch(
     `${process.env.API_BASE_URL}${url}`, //여러개 삭제 api 만들어달라하기
     {
       method: "GET",
@@ -34,17 +34,12 @@ const getData = (url: string) => {
       },
     },
   )
-    .then(res => {
-      if (!res.ok) {
-        throw new Error('Response not OK');
-      }
-      return res.json();
-    })
-    .then(data => data.data)
-    .catch(error => {
-      console.log("error:", error)
-      return null;
-    });
+
+  if (!res.ok) {
+    throw new Error('Response not OK');
+  }
+  const data = await res.json();
+  return data.data;
 }
 
 function ProductOptionModal({
@@ -128,7 +123,7 @@ function ProductOptionModal({
       setProductData(productData as productType);
     };
     fetchProductData();
-  });
+  },[productData, params.productId]);
 
   useEffect(() => {
     const fetchOptionData = async () => {
