@@ -123,7 +123,7 @@ function ProductOptionModal({
       setProductData(productData as productType);
     };
     fetchProductData();
-  },[productData, params.productId]);
+  },[params.productId]);
 
   useEffect(() => {
     const fetchOptionData = async () => {

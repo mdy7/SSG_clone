@@ -1,10 +1,10 @@
 'use client'
 
 import React, { Suspense, useState } from 'react';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 function JoinSocailPage() {
+  const router = useRouter();
   const email = useSearchParams();
   const snsId = useSearchParams();
   const snsType = useSearchParams();
@@ -34,6 +34,11 @@ function JoinSocailPage() {
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if(data.success){
+      router.push('/memberlogin');
     }
   };
 
@@ -165,13 +170,9 @@ function JoinSocailPage() {
           </div>
         </Suspense>
         <div className="w-full h-full mb-[30px]">
-          <Link
-            href={'/memberlogin'}
-            passHref>
-            <button type='submit' className="w-full h-[50px] bg-rose-500 flex justify-center items-center">
-              <div className="text-white text-base font-medium font-sans-serif">확인</div>
-            </button>
-          </Link>
+          <button type='submit' className="w-full h-[50px] bg-rose-500 flex justify-center items-center">
+            <div className="text-white text-base font-medium font-sans-serif">확인</div>
+          </button>
         </div>
       </form>
     </div>
