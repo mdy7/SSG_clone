@@ -15,6 +15,8 @@ import { OrderMemberInfoType } from "@/types/OrderMemberInfo";
 import SimpleHeader from "@/components/layouts/SimpleHeader";
 import { productType } from "@/types/productType";
 import { DeliveryType } from "@/types/delivery/DeliveryListType";
+import { set } from "react-hook-form";
+import { get } from "http";
 
 type DataWithTokenFunction = (token: string, url: string) => Promise<any>;
 
@@ -81,35 +83,67 @@ export default function OrderPage() {
   const quantity: number[] = [Number(params.get('cnt'))];
 
   useEffect(() => {
-    if (token) {
-      getDataWithToken(token, '/order/member-info')
-        .then(data => {
-          setMemberInfo(data);
-          return fetchItems(items);
-        })
-        .then(data => {
-          setProductData(data as productType[]);
-          const productDataWithQuantity = data.map((cur, index) => {
-            return { ...cur, quantity: quantity[index] };
-          });
-          const totalprice = productDataWithQuantity.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
-          const discountprice = productDataWithQuantity.reduce((acc, cur) => acc + (cur.price * (cur.discount / 100)) * cur.quantity, 0);
-          const discountedPrices = productDataWithQuantity.map(product => (product.price * (1 - product.discount / 100)) * product.quantity);
-          setTotalPrice(totalprice);
-          setDiscountPrice(discountprice);
-          setDiscountedPrices(discountedPrices);
 
-          return getDataWithToken(token, '/delivery-address/default');
-        })
-        .then(data => {
-          setDeliveryData(data);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
+    if(token == null || token == undefined) {
+      console.log("token is null")
+      return;
     }
+      fetchItems(items)
+      .then(data => {
+        console.log("data:", data);
+        const productDataWithQuantity = data.map((cur, index) => {
+          return { ...cur, quantity: quantity[index] };
+        });
+        setProductData(data as productType[]);
+        const totalprice = productDataWithQuantity.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+        const discountprice = productDataWithQuantity.reduce((acc, cur) => acc + (cur.price * (cur.discount / 100)) * cur.quantity, 0);
+        const discountedPrices = productDataWithQuantity.map(product => (product.price * (1 - product.discount / 100)) * product.quantity);
+        setTotalPrice(totalprice);
+        setDiscountPrice(discountprice);
+        setDiscountedPrices(discountedPrices);
+
+        // const productDataWithQuantity = data.map((cur, index) => {
+        //   return { ...cur, quantity: quantity[index] };
+        // });
+        // const totalprice = productDataWithQuantity.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+        // const discountprice = productDataWithQuantity.reduce((acc, cur) => acc + (cur.price * (cur.discount / 100)) * cur.quantity, 0);
+        // const discountedPrices = productDataWithQuantity.map(product => (product.price * (1 - product.discount / 100)) * product.quantity);
+        // setTotalPrice(totalprice);
+        // setDiscountPrice(discountprice);
+        // setDiscountedPrices(discountedPrices);
+
+        // return getDataWithToken(token, '/delivery-address/default');
+      })
+
+
+      getDataWithToken(token, '/delivery-address/default')
+      .then(
+        data => {
+          console.log("data:", data)
+          setDeliveryData(data);
+        }
+      )
+      getDataWithToken(token, '/order/member-info').then(data => {
+        setMemberInfo(data);
+        console.log("memberInfo:", data);
+        return data;
+      })
+      // getDataWithToken(token, '/order/member-info')
+      //   .then(data => {
+      //     setMemberInfo(data);
+      //     console.log("memberInfo:", data);
+      //     return data;
+      //     // return fetchItems(items);
+      //   })
+        
+        // .then(data => {
+        //   setDeliveryData(data);
+        // })
+        // .catch(error => {
+        //   console.error('Error fetching data:', error);
+        // });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items]);
+  }, [token]);
 
   return (
     <>
@@ -127,7 +161,7 @@ export default function OrderPage() {
               <span className="text-lg font-semibold">택배배송</span>
             </div>
             <Suspense>
-              {productData.map((product, index) => (
+              {productData && productData.map((product, index) => (
                 <DeliveryItemList key={index} productId={product.id} productname={product.name} productprice={product.price} productdiscount={product.discount} quantity={quantity[index]} />
               ))}
             </Suspense>

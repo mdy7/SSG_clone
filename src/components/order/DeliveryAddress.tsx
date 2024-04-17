@@ -36,11 +36,11 @@ export default function DeliveryAddress({ token, setDeliveryData }: { token: str
     const [Delivery, setDelivery] = useState<DeliveryType | null>(null);
 
     const handleOpen = () => {
-        setSelectAddressModalOpen(true);  // 모달을 닫습니다.
+        setSelectAddressModalOpen(true);
     };
 
     const handleClose = () => {
-        setSelectAddressModalOpen(false);  // 모달을 닫습니다.
+        setSelectAddressModalOpen(false);
     };
 
     useEffect(() => {
@@ -62,12 +62,10 @@ export default function DeliveryAddress({ token, setDeliveryData }: { token: str
         if (token) {
             fetchData(token);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
     useEffect(() => {
         setDeliveryData(Delivery);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [Delivery]);
 
     if (!Delivery) {

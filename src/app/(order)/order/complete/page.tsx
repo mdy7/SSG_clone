@@ -158,7 +158,7 @@ function OrderComplete() {
               계속 쇼핑하기
             </button>
           </Link>
-          <Link href={`#`}>
+          <Link href={`/ready`}>
             <button className="w-1/2 text-[14px] text-[#444444] border-[1px] px-2 h-full rounded-full border-[#e5e5e5]">
               주문상품 상세보기
             </button>
