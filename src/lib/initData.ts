@@ -33,7 +33,7 @@ export const mainNavMenuData: navType[] = [
   },
   {
     id: 7,
-    // url: '/ssgbrand'
+    title: '브랜드',
     url: '/ready'
   },
 ]
