@@ -23,8 +23,7 @@ const getData: DataFunction = async (url: string) => {
       },
     )
     if (res.ok) {
-      const data: commonResType = await res.json()
-      // console.log("data:", data)
+      const data: commonResType = await res.json();
       return data.data
     }
   } catch (error) {
