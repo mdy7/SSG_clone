@@ -28,13 +28,13 @@ export default function Footer() {
           <div className="flex justify-center p-1 flex-wrap font-sans">
             <div className="w-[58.38px] h-[22px] bg-neutral-500 rounded-[3px] border border-zinc-600 flex justify-center items-center text-center text-white text-[10px]" >
               <button
-                onClick={() => alert('게시된 번호로 직접 걸어주세요.')}>
+                onClick={() => alert('준비 중인 기능입니다.')}>
                 전화걸기
               </button>
             </div>
             <div className="w-[71.99px] h-[22px] bg-neutral-500 rounded-[3px] border border-zinc-600 flex justify-center items-center text-white text-[10px]">
               <button
-                onClick={() => alert('고객센터가 존재하지 않습니다.')}
+                onClick={() => alert('준비 중인 기능입니다.')}
               >1:1 고객센터</button>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function Footer() {
           <span className='pl-1 mr-1'>|</span>
           <li>
             <p
-              onClick={() => alert('직접 스토어에서 다운 받아주세요.')}
+              onClick={() => alert('준비 중인 기능입니다.')}
               className='ml-3 mr-3'>
               앱다운로드
             </p>
@@ -74,7 +74,7 @@ export default function Footer() {
           <span className='pl-1 mr-1'>|</span>
           <li>
             <p
-              onClick={() => alert('PC버전 따위 없습니다.')}
+              onClick={() => alert('준비 중인 기능입니다.')}
               className='ml-3 mr-3'>
               PC버전
             </p>
@@ -93,7 +93,7 @@ export default function Footer() {
             <br />
             통신판매업 신고번호: 제2022-서울강남-03751호
             <button
-              onClick={() => alert('설마 여기까지 눌러보셨나요?')}
+              onClick={() => alert('준비 중인 기능입니다.')}
               className='pl-1 underline decoration-1'>
               사업자 정보확인
             </button>
@@ -109,7 +109,7 @@ export default function Footer() {
           <p className='text-[11px]'>
             우리은행 채무지급보증 안내
             <button
-              onClick={() => alert('설마 이것도?')}
+              onClick={() => alert('준비 중인 기능입니다.')}
               className='pl-1 underline decoration-1'>
               서비스가입사실 확인
             </button>
