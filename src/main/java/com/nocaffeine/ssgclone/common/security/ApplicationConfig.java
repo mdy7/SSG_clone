@@ -1,5 +1,5 @@
 package com.nocaffeine.ssgclone.common.security;
-import com.nocaffeine.ssgclone.member.infrastructure.MemberRepository;
+import com.nocaffeine.ssgclone.domain.member.infrastructure.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
