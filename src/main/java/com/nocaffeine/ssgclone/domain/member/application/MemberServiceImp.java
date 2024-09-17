@@ -56,10 +56,7 @@ public class MemberServiceImp implements MemberService {
      * 회원 정보 조회
      */
     @Override
-    public MemberDetailResponseDto findMember(String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public MemberDetailResponseDto findMember(Member member) {
         return MemberDetailResponseDto.builder()
                 .email(member.getEmail())
                 .name(member.getName())

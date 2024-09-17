@@ -8,6 +8,7 @@ import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.deliveryaddress.domain.DeliveryAddress;
 import com.nocaffeine.ssgclone.domain.deliveryaddress.infrastructure.DeliveryAddressRepository;
 import com.nocaffeine.ssgclone.domain.member.domain.Member;
+import com.nocaffeine.ssgclone.domain.member.domain.MemberRole;
 import com.nocaffeine.ssgclone.domain.member.domain.SnsInfo;
 import com.nocaffeine.ssgclone.domain.member.dto.request.*;
 import com.nocaffeine.ssgclone.domain.member.dto.response.TokenResponseDto;
@@ -101,7 +102,7 @@ public class AuthServiceImpl implements AuthService{
             throw new BaseException(WITHDRAWAL_MEMBERS);
         }
 
-        String token = createToken(member);
+        String token = createToken(member.getUuid());
 
         return TokenResponseDto.builder()
                 .accessToken(token)
@@ -138,6 +139,7 @@ public class AuthServiceImpl implements AuthService{
                 .name(memberSaveRequestDto.getName())
                 .phoneNumber(memberSaveRequestDto.getPhoneNumber())
                 .status(false)
+                .role(MemberRole.USER)
                 .build();
 
         // 비밀번호 암호화
@@ -170,17 +172,8 @@ public class AuthServiceImpl implements AuthService{
             throw new BaseException(WITHDRAWAL_MEMBERS);
         }
 
-        try{
-            authenticateManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            member.getUsername(),
-                            memberLoginRequestDto.getPassword()
-                    ));
-        } catch (Exception e){
-            throw new BaseException(FAILED_TO_LOGIN);
-        }
 
-        String token = createToken(member);
+        String token = createToken(member.getUuid());
 
         return TokenResponseDto.builder()
                 .accessToken(token)
@@ -188,8 +181,8 @@ public class AuthServiceImpl implements AuthService{
     }
 
 
-    private String createToken(Member member) {
-        return jwtTokenProvider.generateToken(member);
+    private String createToken(String uuid) {
+        return jwtTokenProvider.createToken(uuid);
     }
 
     /**

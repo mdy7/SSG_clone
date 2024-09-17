@@ -1,7 +1,10 @@
 package com.nocaffeine.ssgclone.domain.member.presentation;
 
 import com.nocaffeine.ssgclone.common.CommonResponse;
+import com.nocaffeine.ssgclone.common.security.AuthenticationMember;
+import com.nocaffeine.ssgclone.common.security.CustomUserDetails;
 import com.nocaffeine.ssgclone.domain.member.application.MemberService;
+import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.member.dto.request.MemberPasswordRequestDto;
 import com.nocaffeine.ssgclone.domain.member.dto.response.MemberDetailResponseDto;
 import com.nocaffeine.ssgclone.domain.member.vo.request.MemberPasswordRequestVo;
@@ -11,6 +14,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,9 +40,8 @@ public class MemberController {
 
     @Operation(summary = "회원 상세 정보", description = "회원 상세 정보")
     @GetMapping("/member")
-    public CommonResponse<MemberDetailResponseVo> memberDetail() {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-        return CommonResponse.success("회원 상세 조회 성공", MemberDetailResponseDto.dtoToVo(memberService.findMember(memberUuid)));
+    public CommonResponse<MemberDetailResponseVo> memberDetail(@AuthenticationMember Member member) {
+        return CommonResponse.success("회원 상세 조회 성공", MemberDetailResponseDto.dtoToVo(memberService.findMember(member)));
     }
 
     @Operation(summary = "회원 탈퇴", description = "회원 탈퇴")
