@@ -5,14 +5,15 @@ import com.nocaffeine.ssgclone.domain.like.dto.request.ProductLikeListRequestDto
 import com.nocaffeine.ssgclone.domain.like.dto.request.ProductLikeRemoveRequest;
 import com.nocaffeine.ssgclone.domain.like.dto.response.LikeStatusResponseDto;
 import com.nocaffeine.ssgclone.domain.like.dto.response.ProductLikeListResponse;
+import com.nocaffeine.ssgclone.domain.member.domain.Member;
 
 import java.util.List;
 
 public interface ProductLikeService {
 
-    void addProductLike(ProductLikeAddRequest productLikeAddRequest, String memberUuid);
-    void removeProductLike(ProductLikeRemoveRequest productLikeRemoveRequest, String memberUuid);
-    void removeListProductLike(ProductLikeListRequestDto productLikeListRequestDto, String memberUuid);
-    List<ProductLikeListResponse> findProductLike(String memberUuid);
-    LikeStatusResponseDto isProductLike(Long productId, String memberUuid);
+    void addProductLike(ProductLikeAddRequest productLikeAddRequest, Member member);
+    void removeProductLike(ProductLikeRemoveRequest productLikeRemoveRequest, Member member);
+    void removeListProductLike(ProductLikeListRequestDto productLikeListRequestDto, Member member);
+    List<ProductLikeListResponse> findProductLike(Member member);
+    LikeStatusResponseDto isProductLike(Long productId, Member member);
 }

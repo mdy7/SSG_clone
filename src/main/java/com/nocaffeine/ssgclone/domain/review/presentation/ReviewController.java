@@ -2,7 +2,9 @@ package com.nocaffeine.ssgclone.domain.review.presentation;
 
 
 import com.nocaffeine.ssgclone.common.CommonResponse;
+import com.nocaffeine.ssgclone.common.security.AuthenticationMember;
 import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
+import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.review.dto.request.ReviewAddRequestDto;
 import com.nocaffeine.ssgclone.domain.review.dto.request.ReviewModifyRequestDto;
 import com.nocaffeine.ssgclone.domain.review.dto.request.ReviewRemoveRequestDto;
@@ -34,35 +36,31 @@ import java.util.List;
 public class ReviewController {
 
     private final ReviewService reviewService;
-    private final JwtTokenProvider jwtTokenProvider;
 
     @Operation(summary = "리뷰 등록", description = "리뷰 등록")
     @PostMapping
-    public CommonResponse<String> reviewAdd(@RequestBody ReviewAddRequestVo reviewAddRequestVo) {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-        reviewService.addReview(ReviewAddRequestDto.voToDto(reviewAddRequestVo), memberUuid);
+    public CommonResponse<String> reviewAdd(@AuthenticationMember Member member, @RequestBody ReviewAddRequestVo reviewAddRequestVo) {
+        reviewService.addReview(ReviewAddRequestDto.voToDto(reviewAddRequestVo), member);
         return CommonResponse.success("리뷰 등록 성공");
     }
 
     @Operation(summary = "리뷰 삭제", description = "리뷰 삭제")
     @DeleteMapping
-    public CommonResponse<String> reviewRemove(@RequestBody ReviewRemoveRequestVo reviewRemoveRequestVo) {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-        reviewService.removeReview(ReviewRemoveRequestDto.voToDto(reviewRemoveRequestVo), memberUuid);
+    public CommonResponse<String> reviewRemove(@AuthenticationMember Member member, @RequestBody ReviewRemoveRequestVo reviewRemoveRequestVo) {
+        reviewService.removeReview(ReviewRemoveRequestDto.voToDto(reviewRemoveRequestVo), member);
         return CommonResponse.success("리뷰 삭제 성공");
     }
 
     @Operation(summary = "리뷰 수정", description = "리뷰 수정")
     @PutMapping
-    public CommonResponse<String> reviewModify(@RequestBody ReviewModifyRequestVo reviewModifyRequestVo) {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-        reviewService.modifyReview(ReviewModifyRequestDto.voToDto(reviewModifyRequestVo), memberUuid);
+    public CommonResponse<String> reviewModify(@AuthenticationMember Member member, @RequestBody ReviewModifyRequestVo reviewModifyRequestVo) {
+        reviewService.modifyReview(ReviewModifyRequestDto.voToDto(reviewModifyRequestVo), member);
         return CommonResponse.success("리뷰 수정 성공");
     }
 
     @Operation(summary = "리뷰 상세 조회", description = "리뷰 상세 조회")
     @GetMapping("{reviewId}")
-    public CommonResponse<ReviewDetailResponseVo> reviewDetail(@PathVariable("reviewId") Long reviewId) {
+    public CommonResponse<ReviewDetailResponseVo> reviewDetail(@AuthenticationMember Member member, @PathVariable("reviewId") Long reviewId) {
         return CommonResponse.success("리뷰 상세 조회 성공",
                 ReviewDetailResponseDto.dtoToVo(reviewService.findReviewDetail(reviewId)));
     }
@@ -94,11 +92,10 @@ public class ReviewController {
 
     @Operation(summary = "내가 작성한 리뷰 리스트 조회", description = "내가 작성한 리뷰 리스트 조회")
     @GetMapping("/member")
-    public CommonResponse<List<ReviewListResponseVo>> reviewFindMember() {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
+    public CommonResponse<List<ReviewListResponseVo>> reviewFindMember(@AuthenticationMember Member member) {
         List<ReviewListResponseVo> reviewListResponseVo = new ArrayList<>();
 
-        for (ReviewListResponseDto reviewListResponseDto : reviewService.findMyReviews(memberUuid)) {
+        for (ReviewListResponseDto reviewListResponseDto : reviewService.findMyReviews(member)) {
             reviewListResponseVo.add(ReviewListResponseDto.dtoToVo(reviewListResponseDto));
         }
 
@@ -107,10 +104,8 @@ public class ReviewController {
 
     @Operation(summary = "내가 작성할 수 있는 리뷰 리스트 조회", description = "내가 작성할 수 있는 리뷰 리스트 조회")
     @GetMapping("/member/possible")
-    public CommonResponse<List<ReviewPossibleWriteResponseDto>> reviewFindMemberPossible() {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-
-        return CommonResponse.success("내가 작성할 수 있는 리뷰 리스트 조회 성공",reviewService.findWritableReviews(memberUuid));
+    public CommonResponse<List<ReviewPossibleWriteResponseDto>> reviewFindMemberPossible(@AuthenticationMember Member member) {
+        return CommonResponse.success("내가 작성할 수 있는 리뷰 리스트 조회 성공",reviewService.findWritableReviews(member));
     }
 
 }

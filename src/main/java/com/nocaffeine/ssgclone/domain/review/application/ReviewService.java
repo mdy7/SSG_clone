@@ -1,5 +1,6 @@
 package com.nocaffeine.ssgclone.domain.review.application;
 
+import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.review.dto.request.ReviewAddRequestDto;
 import com.nocaffeine.ssgclone.domain.review.dto.request.ReviewModifyRequestDto;
 import com.nocaffeine.ssgclone.domain.review.dto.request.ReviewRemoveRequestDto;
@@ -12,13 +13,13 @@ import java.util.List;
 
 public interface ReviewService {
 
-    void addReview(ReviewAddRequestDto reviewAddRequestDto, String memberUuid);
+    void addReview(ReviewAddRequestDto reviewAddRequestDto, Member member);
 
-    void removeReview(ReviewRemoveRequestDto reviewRemoveRequestDto, String memberUuid);
+    void removeReview(ReviewRemoveRequestDto reviewRemoveRequestDto, Member member);
 
-    List<ReviewPossibleWriteResponseDto> findWritableReviews(String memberUuid);
+    List<ReviewPossibleWriteResponseDto> findWritableReviews(Member member);
 
-    void modifyReview(ReviewModifyRequestDto reviewModifyRequestDto, String memberUuid);
+    void modifyReview(ReviewModifyRequestDto reviewModifyRequestDto, Member member);
 
     List<ReviewListResponseDto> findReviewByProduct(Long productId);
 
@@ -26,5 +27,5 @@ public interface ReviewService {
 
     List<ReviewImageResponseDto> findReviewImage(Long reviewId);
 
-    List<ReviewListResponseDto> findMyReviews(String memberUuid);
+    List<ReviewListResponseDto> findMyReviews(Member member);
 }

@@ -2,7 +2,6 @@ package com.nocaffeine.ssgclone.domain.member.presentation;
 
 import com.nocaffeine.ssgclone.common.CommonResponse;
 import com.nocaffeine.ssgclone.common.security.AuthenticationMember;
-import com.nocaffeine.ssgclone.common.security.CustomUserDetails;
 import com.nocaffeine.ssgclone.domain.member.application.MemberService;
 import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.member.dto.request.MemberPasswordRequestDto;
@@ -14,9 +13,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,13 +23,11 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
-    private final JwtTokenProvider jwtTokenProvider;
 
 
     @Operation(summary = "비밀번호 변경", description = "비밀번호 변경")
     @PutMapping("/member/password")
     public CommonResponse<String> changePassword(@AuthenticationMember Member member, @RequestBody MemberPasswordRequestVo memberPasswordRequestVo) {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
         memberService.updatePassword(member, MemberPasswordRequestDto.voToDto(memberPasswordRequestVo));
         return CommonResponse.success("비밀번호 변경 성공");
     }
@@ -47,7 +41,6 @@ public class MemberController {
     @Operation(summary = "회원 탈퇴", description = "회원 탈퇴")
     @DeleteMapping("/member")
     public CommonResponse<String> memberRemove(@AuthenticationMember Member member) {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
         memberService.removeMember(member);
         return CommonResponse.success("회원 탈퇴 성공");
     }

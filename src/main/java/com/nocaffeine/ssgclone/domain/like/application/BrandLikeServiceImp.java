@@ -37,10 +37,7 @@ public class BrandLikeServiceImp implements BrandLikeService{
      */
     @Override
     @Transactional
-    public void addBrandLike(BrandLikeAddRequest brandLikeAddRequest, String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public void addBrandLike(BrandLikeAddRequest brandLikeAddRequest, Member member) {
         Brand brand = brandRepository.findById(brandLikeAddRequest.getBrandId())
                 .orElseThrow(() -> new BaseException(NO_EXIST_BRAND));
 
@@ -63,10 +60,7 @@ public class BrandLikeServiceImp implements BrandLikeService{
      */
     @Override
     @Transactional
-    public void removeBrandLike(BrandLikeRemoveRequest brandLikeRemoveRequest, String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public void removeBrandLike(BrandLikeRemoveRequest brandLikeRemoveRequest, Member member) {
         Brand brand = brandRepository.findById(brandLikeRemoveRequest.getBrandId())
                 .orElseThrow(() -> new BaseException(NO_EXIST_BRAND));
 
@@ -81,10 +75,7 @@ public class BrandLikeServiceImp implements BrandLikeService{
      * 브랜드 좋아요 목록 조회
      */
     @Override
-    public List<BrandLikeListResponse> findBrandLike(String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public List<BrandLikeListResponse> findBrandLike(Member member) {
         List<BrandLike> bradList = brandLikeRepository.findByMember(member);
 
         List<BrandLikeListResponse> brandLikeListResponses = new ArrayList<>();
@@ -103,10 +94,7 @@ public class BrandLikeServiceImp implements BrandLikeService{
     }
 
     @Override
-    public LikeStatusResponseDto isBrandLike(Long brandId, String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public LikeStatusResponseDto isBrandLike(Long brandId, Member member) {
         Brand brand = brandRepository.findById(brandId)
                 .orElseThrow(() -> new BaseException(NO_EXIST_BRAND));
 

@@ -34,10 +34,7 @@ public class CategoryLikeServiceImp implements CategoryLikeService{
      */
     @Override
     @Transactional
-    public void addCategoryLike(CategoryLikeAddRequest categoryLikeAddRequest, String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public void addCategoryLike(CategoryLikeAddRequest categoryLikeAddRequest, Member member) {
         categoryLikeRepository.findByMemberAndMediumCategoryAndSmallCategoryAndTinyCategory(member, categoryLikeAddRequest.getMediumCategoryId(),
                 categoryLikeAddRequest.getSmallCategoryId(), categoryLikeAddRequest.getTinyCategoryId())
                 .ifPresent(categoryLike -> {
@@ -60,10 +57,7 @@ public class CategoryLikeServiceImp implements CategoryLikeService{
      * 카테고리 좋아요 조회
      */
     @Override
-    public List<CategoryLikeListResponse> findCategoryLike(String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public List<CategoryLikeListResponse> findCategoryLike(Member member) {
         List<CategoryLike> categoryLike = categoryLikeRepository.findByMember(member);
 
         List<CategoryLikeListResponse> response = new ArrayList<>();
@@ -88,10 +82,7 @@ public class CategoryLikeServiceImp implements CategoryLikeService{
      */
     @Override
     @Transactional
-    public void removeCategoryLike(CategoryLikeRemoveRequest categoryLikeRemoveRequest, String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public void removeCategoryLike(CategoryLikeRemoveRequest categoryLikeRemoveRequest, Member member) {
         CategoryLike categoryLike = categoryLikeRepository.findByIdAndMember(categoryLikeRemoveRequest.getCategoryLikeId(), member)
                 .orElseThrow(() -> new BaseException(NO_DATA));
 

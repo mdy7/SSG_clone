@@ -1,5 +1,6 @@
 package com.nocaffeine.ssgclone.domain.order.infrastructure;
 
+import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.order.domain.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,5 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
     Optional<Orders> findByPhoneNumberAndOrderNumber(String orderPhone, Long orderNumber);
 
     List<Orders> findByStatusAndUuid(Orders.OrderStatus orderStatus, String memberUuid);
+
 }

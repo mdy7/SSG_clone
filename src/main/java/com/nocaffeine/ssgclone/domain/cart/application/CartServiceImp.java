@@ -38,10 +38,7 @@ public class CartServiceImp implements CartService {
      */
     @Override
     @Transactional
-    public void addCart(CartAddRequestDto cartAddRequestDto, String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public void addCart(CartAddRequestDto cartAddRequestDto, Member member) {
         OptionSelectedProduct optionSelectedProduct = optionSelectedProductRepository.findById(cartAddRequestDto.getOptionSelectedProductId())
                 .orElseThrow(() -> new BaseException(NO_SELECTED_OPTION_PRODUCT));
 
@@ -76,9 +73,7 @@ public class CartServiceImp implements CartService {
      * 장바구니 리스트 조회.
      */
     @Override
-    public List<CartListResponseDto> findCart(String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
+    public List<CartListResponseDto> findCart(Member member) {
 
         List<Cart> cartList = cartRepository.findByMember(member);
 
@@ -102,10 +97,7 @@ public class CartServiceImp implements CartService {
      * 장바구니 선택한 상품 조회.
      */
     @Override
-    public List<CartListResponseDto> findCheckedCart(String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public List<CartListResponseDto> findCheckedCart(Member member) {
         List<Cart> cartList = cartRepository.findByCheckProductAndMember(true, member);
 
         List<CartListResponseDto> responseCartList = new ArrayList<>();
@@ -138,10 +130,7 @@ public class CartServiceImp implements CartService {
      * 장바구니 상품 개수 조회.
      */
     @Override
-    public CartCountResponseDto totalCountCart(String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public CartCountResponseDto totalCountCart(Member member) {
         List<Cart> cartList = cartRepository.findByMember(member);
 
         int cartSize = cartList.size();

@@ -1,6 +1,7 @@
 package com.nocaffeine.ssgclone.domain.cart.presentation;
 
 
+import com.nocaffeine.ssgclone.common.security.AuthenticationMember;
 import com.nocaffeine.ssgclone.domain.cart.application.CartService;
 import com.nocaffeine.ssgclone.domain.cart.dto.request.CartAddRequestDto;
 import com.nocaffeine.ssgclone.domain.cart.dto.response.CartCountResponseDto;
@@ -12,6 +13,7 @@ import com.nocaffeine.ssgclone.domain.cart.vo.response.CartListResponseVo;
 import com.nocaffeine.ssgclone.domain.cart.vo.response.CartPriceResponseVo;
 import com.nocaffeine.ssgclone.common.CommonResponse;
 import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
+import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -29,14 +31,12 @@ import java.util.List;
 public class CartController {
 
     private final CartService cartService;
-    private final JwtTokenProvider jwtTokenProvider;
 
 
     @Operation(summary = "장바구니에 상품 추가", description = "장바구니에 상품 추가")
     @PostMapping
-    public CommonResponse<String> cartAdd(@RequestBody CartAddRequestVo cartAddRequestVo) {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-        cartService.addCart(CartAddRequestDto.voToDto(cartAddRequestVo), memberUuid);
+    public CommonResponse<String> cartAdd(@AuthenticationMember Member member, @RequestBody CartAddRequestVo cartAddRequestVo) {
+        cartService.addCart(CartAddRequestDto.voToDto(cartAddRequestVo), member);
         return CommonResponse.success("장바구니 상품 추가 성공.");
     }
 
@@ -57,11 +57,9 @@ public class CartController {
 
     @Operation(summary = "장바구니 상품 리스트 조회", description = "장바구니 상품 리스트 조회")
     @GetMapping
-    public CommonResponse<List<CartListResponseVo>> cartList() {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-
+    public CommonResponse<List<CartListResponseVo>> cartList(@AuthenticationMember Member member) {
         List<CartListResponseVo> cartListResponseVo = new ArrayList<>();
-        for (CartListResponseDto cartListResponseDto : cartService.findCart(memberUuid)) {
+        for (CartListResponseDto cartListResponseDto : cartService.findCart(member)) {
             cartListResponseVo.add(CartListResponseDto.dtoToVo(cartListResponseDto));
         }
 
@@ -85,9 +83,8 @@ public class CartController {
 
     @Operation(summary = "장바구니 상품 개수 조회", description = "장바구니 상품 개수 조회")
     @GetMapping("/count")
-    public CommonResponse<CartCountResponseVo> cartCount() {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-        return CommonResponse.success("장바구니 상품 개수 조회 성공", CartCountResponseDto.dtoToVo(cartService.totalCountCart(memberUuid)));
+    public CommonResponse<CartCountResponseVo> cartCount(@AuthenticationMember Member member) {
+        return CommonResponse.success("장바구니 상품 개수 조회 성공", CartCountResponseDto.dtoToVo(cartService.totalCountCart(member)));
     }
 
     @Operation(summary = "장바구니 선택한 상품 가격 조회", description = "장바구니 선택한 상품 가격 조회")
@@ -112,11 +109,10 @@ public class CartController {
 
     @Operation(summary = "장바구니 선택 상품만 조회", description = "장바구니 선택 상품만 조회")
     @GetMapping("/checked")
-    public CommonResponse<List<CartListResponseVo>> cartCheckedList() {
-        String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
+    public CommonResponse<List<CartListResponseVo>> cartCheckedList(@AuthenticationMember Member member) {
 
         List<CartListResponseVo> cartListResponseVo = new ArrayList<>();
-        for (CartListResponseDto cartListResponseDto : cartService.findCheckedCart(memberUuid)) {
+        for (CartListResponseDto cartListResponseDto : cartService.findCheckedCart(member)) {
             cartListResponseVo.add(CartListResponseDto.dtoToVo(cartListResponseDto));
         }
 

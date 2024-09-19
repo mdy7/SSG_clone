@@ -55,10 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
      */
     @Override
     @Transactional
-    public void addReview(ReviewAddRequestDto reviewAddRequestDto, String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public void addReview(ReviewAddRequestDto reviewAddRequestDto, Member member) {
         Product product = productRepository.findById(reviewAddRequestDto.getProductId())
                 .orElseThrow(() -> new BaseException(NO_PRODUCT));
 
@@ -120,7 +117,7 @@ public class ReviewServiceImpl implements ReviewService {
      */
     @Override
     @Transactional
-    public void removeReview(ReviewRemoveRequestDto reviewRemoveRequestDto, String memberUuid) {
+    public void removeReview(ReviewRemoveRequestDto reviewRemoveRequestDto, Member member) {
         Review review = reviewRepository.findById(reviewRemoveRequestDto.getReviewId())
                 .orElseThrow(() -> new BaseException(NO_EXIST_REVIEW));
 
@@ -157,7 +154,7 @@ public class ReviewServiceImpl implements ReviewService {
      */
     @Override
     @Transactional
-    public void modifyReview(ReviewModifyRequestDto reviewModifyRequestDto, String memberUuid) {
+    public void modifyReview(ReviewModifyRequestDto reviewModifyRequestDto, Member member) {
         Review review = reviewRepository.findById(reviewModifyRequestDto.getReviewId())
                 .orElseThrow(() -> new BaseException(NO_EXIST_REVIEW));
 
@@ -208,8 +205,8 @@ public class ReviewServiceImpl implements ReviewService {
      * 작성 가능한 리뷰 조회
      */
     @Override
-    public List<ReviewPossibleWriteResponseDto> findWritableReviews(String memberUuid) {
-        List<Orders> orders = orderRepository.findByUuid(memberUuid);
+    public List<ReviewPossibleWriteResponseDto> findWritableReviews(Member member) {
+        List<Orders> orders = orderRepository.findByUuid(member.getUuid());
 
         List<ReviewPossibleWriteResponseDto> writableReviews = new ArrayList<>();
 
@@ -322,10 +319,7 @@ public class ReviewServiceImpl implements ReviewService {
      * 내가 작성한 리뷰 조회
      */
     @Override
-    public List<ReviewListResponseDto> findMyReviews(String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public List<ReviewListResponseDto> findMyReviews(Member member) {
         List<Review> reviews = reviewRepository.findByMemberUuid(member.getUuid());
 
         List<ReviewListResponseDto> reviewListResponseDto = new ArrayList<>();
