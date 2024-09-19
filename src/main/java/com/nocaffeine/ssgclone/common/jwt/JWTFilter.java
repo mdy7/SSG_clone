@@ -1,6 +1,8 @@
-package com.nocaffeine.ssgclone.common.security;
+package com.nocaffeine.ssgclone.common.jwt;
 
 
+import com.nocaffeine.ssgclone.common.security.CustomUserDetails;
+import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.member.infrastructure.MemberRepository;
 import jakarta.servlet.FilterChain;

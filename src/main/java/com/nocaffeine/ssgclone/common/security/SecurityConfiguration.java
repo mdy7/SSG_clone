@@ -1,5 +1,6 @@
 package com.nocaffeine.ssgclone.common.security;
 
+import com.nocaffeine.ssgclone.common.jwt.JWTFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
