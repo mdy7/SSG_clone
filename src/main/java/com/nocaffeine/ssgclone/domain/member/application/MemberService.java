@@ -8,10 +8,10 @@ import com.nocaffeine.ssgclone.domain.member.dto.response.MemberDetailResponseDt
 public interface MemberService {
 
 
-    void updatePassword(String memberUuid, MemberPasswordRequestDto memberPasswordRequestDto);
+    void updatePassword(Member member, MemberPasswordRequestDto memberPasswordRequestDto);
 
     MemberDetailResponseDto findMember(Member member);
 
-    void removeMember(String memberUuid);
+    void removeMember(Member member);
 
 }

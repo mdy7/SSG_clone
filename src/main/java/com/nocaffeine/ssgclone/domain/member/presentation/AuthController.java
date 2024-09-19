@@ -54,7 +54,7 @@ public class AuthController {
     @Operation(summary = "일반 회원가입", description = "일반 회원가입")
     @PostMapping("/join")
     public CommonResponse<String> memberCreate(@RequestBody MemberSaveRequestVo memberSaveRequestVo) {
-        authService.addMember(MemberSaveRequestDto.voToDto(memberSaveRequestVo));
+        authService.join(MemberSaveRequestDto.voToDto(memberSaveRequestVo));
         return CommonResponse.success("회원가입 성공");
     }
 

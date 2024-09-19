@@ -32,9 +32,9 @@ public class MemberController {
 
     @Operation(summary = "비밀번호 변경", description = "비밀번호 변경")
     @PutMapping("/member/password")
-    public CommonResponse<String> changePassword(@RequestBody MemberPasswordRequestVo memberPasswordRequestVo) {
+    public CommonResponse<String> changePassword(@AuthenticationMember Member member, @RequestBody MemberPasswordRequestVo memberPasswordRequestVo) {
         String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-        memberService.updatePassword(memberUuid, MemberPasswordRequestDto.voToDto(memberPasswordRequestVo));
+        memberService.updatePassword(member, MemberPasswordRequestDto.voToDto(memberPasswordRequestVo));
         return CommonResponse.success("비밀번호 변경 성공");
     }
 
@@ -46,9 +46,9 @@ public class MemberController {
 
     @Operation(summary = "회원 탈퇴", description = "회원 탈퇴")
     @DeleteMapping("/member")
-    public CommonResponse<String> memberRemove() {
+    public CommonResponse<String> memberRemove(@AuthenticationMember Member member) {
         String memberUuid = jwtTokenProvider.validateAndGetUserUuid(jwtTokenProvider.getHeader());
-        memberService.removeMember(memberUuid);
+        memberService.removeMember(member);
         return CommonResponse.success("회원 탈퇴 성공");
     }
 

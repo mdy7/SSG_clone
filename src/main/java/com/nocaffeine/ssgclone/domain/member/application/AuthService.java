@@ -7,7 +7,7 @@ public interface AuthService {
     void snsAddMember(SnsMemberAddRequestDto snsMemberAddRequestDto);
     TokenResponseDto snsLogin(SnsMemberLoginRequestDto snsMemberLoginRequestDto);
 
-    void addMember(MemberSaveRequestDto memberSaveRequestDto);
+    void join(MemberSaveRequestDto memberSaveRequestDto);
     void duplicationEmail(String email);
     TokenResponseDto logIn(MemberLoginRequestDto memberLoginRequestDto);
 

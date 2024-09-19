@@ -29,10 +29,7 @@ public class MemberServiceImp implements MemberService {
      */
     @Override
     @Transactional
-    public void updatePassword(String memberUuid, MemberPasswordRequestDto memberPasswordRequestDto) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public void updatePassword(Member member, MemberPasswordRequestDto memberPasswordRequestDto) {
         if(!memberPasswordRequestDto.password.equals(memberPasswordRequestDto.getPasswordCheck())){
             throw new BaseException(FAILED_TO_PASSWORD);
         }
@@ -45,6 +42,7 @@ public class MemberServiceImp implements MemberService {
                 .name(member.getName())
                 .phoneNumber(member.getPhoneNumber())
                 .address(member.getAddress())
+                .role(member.getRole())
                 .build();
 
         newMember.hashPassword(memberPasswordRequestDto.getPassword());
@@ -70,10 +68,7 @@ public class MemberServiceImp implements MemberService {
      */
     @Override
     @Transactional
-    public void removeMember(String memberUuid) {
-        Member member = memberRepository.findByUuid(memberUuid)
-                .orElseThrow(() -> new BaseException(NO_EXIST_MEMBERS));
-
+    public void removeMember(Member member) {
         memberRepository.save(Member.builder()
                 .id(member.getId())
                 .email(member.getEmail())

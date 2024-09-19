@@ -49,9 +49,9 @@ public class JWTFilter extends OncePerRequestFilter { // OncePerRequestFilter ëŠ
             }
 
 
-            String memberId = jwtTokenProvider.getMemberId(token);
+            String uuid = jwtTokenProvider.getMemberUuid(token);
 
-            Member member = memberRepository.findByUuidOrThrow(memberId);
+            Member member = memberRepository.findByUuidOrThrow(uuid);
 
             CustomUserDetails userDetails = new CustomUserDetails(member);
 

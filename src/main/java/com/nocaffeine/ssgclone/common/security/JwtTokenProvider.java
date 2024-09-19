@@ -59,7 +59,7 @@ public class JwtTokenProvider {
      * @param token 토큰
      * @return uuid
      */
-    public String getMemberId(String token) {
+    public String getMemberUuid(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 

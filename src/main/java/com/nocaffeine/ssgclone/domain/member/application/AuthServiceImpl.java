@@ -124,7 +124,7 @@ public class AuthServiceImpl implements AuthService{
      */
     @Override
     @Transactional
-    public void addMember(MemberSaveRequestDto memberSaveRequestDto) {
+    public void join(MemberSaveRequestDto memberSaveRequestDto) {
         duplicationEmail(memberSaveRequestDto.getEmail());
         createMember(memberSaveRequestDto);
     }
@@ -172,11 +172,15 @@ public class AuthServiceImpl implements AuthService{
             throw new BaseException(WITHDRAWAL_MEMBERS);
         }
 
+        authenticateManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        memberLoginRequestDto.getEmail(),
+                        memberLoginRequestDto.getPassword())
+        );
 
-        String token = createToken(member.getUuid());
 
         return TokenResponseDto.builder()
-                .accessToken(token)
+                .accessToken(createToken(member.getUuid()))
                 .build();
     }
 
