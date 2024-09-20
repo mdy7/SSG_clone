@@ -10,14 +10,16 @@ const nextConfig = {
       }
     ]
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/:path*',
-  //       destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/:path*`,
-  //     },
-  //   ]
-  // },
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/:path*`,
+      },
+    ]
+  },
+  
   env: {
     API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
     AWS_S3_REGION: process.env.NEXT_PUBLIC_AWS_S3_REGION,

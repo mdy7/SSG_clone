@@ -47,7 +47,8 @@ public class SecurityConfiguration {
         // 인가 관리
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**", "/api/v1/product/**",
+                                "/swagger-ui/**", "/swagger-resources/**", "/api-docs/**").permitAll()
                         .requestMatchers("/member/**").hasRole("USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated());
