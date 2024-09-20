@@ -3,7 +3,6 @@ package com.nocaffeine.ssgclone.domain.like.presentation;
 
 import com.nocaffeine.ssgclone.common.CommonResponse;
 import com.nocaffeine.ssgclone.common.security.AuthenticationMember;
-import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.like.application.ProductLikeService;
 import com.nocaffeine.ssgclone.domain.like.dto.request.ProductLikeAddRequest;
 import com.nocaffeine.ssgclone.domain.like.dto.request.ProductLikeListRequestDto;

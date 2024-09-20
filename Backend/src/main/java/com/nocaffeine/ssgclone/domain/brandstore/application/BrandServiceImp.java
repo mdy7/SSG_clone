@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.nocaffeine.ssgclone.common.exception.BaseResponseStatus.NO_DATA;
+import static com.nocaffeine.ssgclone.common.exception.ErrorCode.NO_DATA;
 
 @Service
 @RequiredArgsConstructor

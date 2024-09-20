@@ -4,7 +4,7 @@ package com.nocaffeine.ssgclone.domain.member.application;
 import com.nocaffeine.ssgclone.common.EmailProvider;
 import com.nocaffeine.ssgclone.common.exception.BaseException;
 import com.nocaffeine.ssgclone.common.redis.RedisUtils;
-import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
+import com.nocaffeine.ssgclone.common.jwt.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.deliveryaddress.domain.DeliveryAddress;
 import com.nocaffeine.ssgclone.domain.deliveryaddress.infrastructure.DeliveryAddressRepository;
 import com.nocaffeine.ssgclone.domain.member.domain.Member;
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
-import static com.nocaffeine.ssgclone.common.exception.BaseResponseStatus.*;
+import static com.nocaffeine.ssgclone.common.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor

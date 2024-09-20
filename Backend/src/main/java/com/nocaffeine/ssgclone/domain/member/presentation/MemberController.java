@@ -7,7 +7,6 @@ import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.member.dto.request.MemberPasswordRequestDto;
 import com.nocaffeine.ssgclone.domain.member.dto.response.MemberDetailResponseDto;
 import com.nocaffeine.ssgclone.domain.member.vo.request.MemberPasswordRequestVo;
-import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.member.vo.response.MemberDetailResponseVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

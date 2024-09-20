@@ -1,7 +1,7 @@
 package com.nocaffeine.ssgclone.domain.order.presentation;
 
 import com.nocaffeine.ssgclone.common.CommonResponse;
-import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
+import com.nocaffeine.ssgclone.common.jwt.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.order.application.OrderService;
 import com.nocaffeine.ssgclone.domain.order.dto.request.GuestOrderInfoRequestDto;
 import com.nocaffeine.ssgclone.domain.order.dto.request.OrderIdRequestDto;

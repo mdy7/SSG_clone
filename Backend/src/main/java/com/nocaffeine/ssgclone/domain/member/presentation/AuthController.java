@@ -1,7 +1,6 @@
 package com.nocaffeine.ssgclone.domain.member.presentation;
 
 import com.nocaffeine.ssgclone.common.CommonResponse;
-import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.member.application.AuthService;
 import com.nocaffeine.ssgclone.domain.member.dto.request.AuthEmailRequestDto;
 import com.nocaffeine.ssgclone.domain.member.dto.request.MemberLoginRequestDto;

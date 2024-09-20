@@ -3,7 +3,6 @@ package com.nocaffeine.ssgclone.domain.review.presentation;
 
 import com.nocaffeine.ssgclone.common.CommonResponse;
 import com.nocaffeine.ssgclone.common.security.AuthenticationMember;
-import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.review.dto.request.ReviewAddRequestDto;
 import com.nocaffeine.ssgclone.domain.review.dto.request.ReviewModifyRequestDto;

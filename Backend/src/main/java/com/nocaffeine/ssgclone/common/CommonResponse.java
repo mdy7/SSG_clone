@@ -1,6 +1,6 @@
 package com.nocaffeine.ssgclone.common;
 
-import com.nocaffeine.ssgclone.common.exception.BaseResponseStatus;
+import com.nocaffeine.ssgclone.common.exception.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,17 +21,17 @@ public class CommonResponse<T> {
         return new CommonResponse<>(true, message, data,null);
     }
 
-    public static <T> CommonResponse<T> fail(BaseResponseStatus code, String message) {
+    public static <T> CommonResponse<T> fail(ErrorCode code, String message) {
         return new CommonResponse<>(false, message, null, new Error(code));
     }
 
-    public static <T> CommonResponse<T> fail(BaseResponseStatus code, T data, String message) {
+    public static <T> CommonResponse<T> fail(ErrorCode code, T data, String message) {
         return new CommonResponse<>(false, message, data, new Error(code));
     }
     @Getter
     @AllArgsConstructor
     static class Error {
-        private BaseResponseStatus code;
+        private ErrorCode code;
     }
 
 }

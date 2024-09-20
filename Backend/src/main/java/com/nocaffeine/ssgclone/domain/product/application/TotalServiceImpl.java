@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
-import static com.nocaffeine.ssgclone.common.exception.BaseResponseStatus.*;
+import static com.nocaffeine.ssgclone.common.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor

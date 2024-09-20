@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static com.nocaffeine.ssgclone.common.exception.BaseResponseStatus.INVALID_CART_QUANTITY;
+import static com.nocaffeine.ssgclone.common.exception.ErrorCode.INVALID_CART_QUANTITY;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

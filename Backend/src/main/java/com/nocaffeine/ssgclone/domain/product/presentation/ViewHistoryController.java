@@ -1,7 +1,7 @@
 package com.nocaffeine.ssgclone.domain.product.presentation;
 
 import com.nocaffeine.ssgclone.common.CommonResponse;
-import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
+import com.nocaffeine.ssgclone.common.jwt.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.product.application.ViewHistoryService;
 import com.nocaffeine.ssgclone.domain.product.dto.request.viewhistory.ViewHistoryRequestDto;
 import com.nocaffeine.ssgclone.domain.product.dto.response.viewhistory.ViewHistoryPageListResponseDto;

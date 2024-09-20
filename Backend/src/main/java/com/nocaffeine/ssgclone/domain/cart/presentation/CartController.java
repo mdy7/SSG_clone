@@ -12,7 +12,6 @@ import com.nocaffeine.ssgclone.domain.cart.vo.response.CartCountResponseVo;
 import com.nocaffeine.ssgclone.domain.cart.vo.response.CartListResponseVo;
 import com.nocaffeine.ssgclone.domain.cart.vo.response.CartPriceResponseVo;
 import com.nocaffeine.ssgclone.common.CommonResponse;
-import com.nocaffeine.ssgclone.common.security.JwtTokenProvider;
 import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
