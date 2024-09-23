@@ -1,5 +1,6 @@
 package com.nocaffeine.ssgclone.domain.member.infrastructure;
 
+import com.nocaffeine.ssgclone.domain.member.domain.Member;
 import com.nocaffeine.ssgclone.domain.member.domain.SnsInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,6 @@ public interface SnsInfoRepository extends JpaRepository<SnsInfo, Long>{
     Optional<SnsInfo> findBySnsId(String snsId);
 
     Optional<SnsInfo> findBySnsIdAndSnsType(String snsId, String snsType);
+
+    Optional<SnsInfo> findBySnsIdAndMemberAndSnsType(String socialCode, Member member, String snsType);
 }

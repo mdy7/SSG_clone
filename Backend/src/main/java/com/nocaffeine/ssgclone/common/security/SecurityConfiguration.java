@@ -1,6 +1,8 @@
 package com.nocaffeine.ssgclone.common.security;
 
 import com.nocaffeine.ssgclone.common.jwt.JWTFilter;
+import com.nocaffeine.ssgclone.common.oauth2.handler.CustomOAuth2SuccessHandler;
+import com.nocaffeine.ssgclone.common.oauth2.service.CustomOauth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
 
     private final JWTFilter jwtFilter;
+    private final CustomOauth2UserService customOAuth2UserService;
+    private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
 
 
     @Bean
@@ -47,16 +51,23 @@ public class SecurityConfiguration {
         // 인가 관리
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/v1/auth/**", "/api/v1/product/**",
-                                "/swagger-ui/**", "/swagger-resources/**", "/api-docs/**").permitAll()
-                        .requestMatchers("/member/**").hasRole("USER")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/auth/**","/oauth2/**",
+                                "/api/v1/product/**",
+                                "/swagger-ui/**", "/swagger-resources/**", "/api-docs/**")
+                        .permitAll()
+                        .requestMatchers("/api/v1/member/**").hasRole("USER")
+                        .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
         // 필터 관리
-
         http
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http
+                .oauth2Login(oauth2 -> oauth2
+                        .redirectionEndpoint(endpoint -> endpoint.baseUri("/oauth2/code/*"))
+                        .userInfoEndpoint(endpoint -> endpoint.userService(customOAuth2UserService))
+                        .successHandler(customOAuth2SuccessHandler));
 
         return http.build();
     }
